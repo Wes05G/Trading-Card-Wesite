@@ -8,8 +8,26 @@ body {
     min-height: 100vh;
 }
 main {
-    text-align: center
+    text-align: center; /* keep default main behavior for other pages */
 }
+
+/* Only card details use horizontal layout */
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
 h1 {
     text-align: center;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -72,4 +90,50 @@ footer li {
 }
 img{
     margin-bottom: -45px;
+}
+li a{
+    color: #58b09c;
+    text-decoration: none;
+     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+li.b{
+    list-style-type: none;
+    padding: 5px;
+    display: block;
+    text-align: center;
+}
+.button {
+    background-color: #3d3522;
+    border: none;
+    color: #58b09c;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.button:hover {
+    background-color: #386150;
+}
+#cardName, #cardGrade, #cardPrice, #status {
+    text-align: left;
+}
+.back-button {
+    background-color: #3d3522;
+    border: none;
+    color: #58b09c;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.back-button:hover {
+    background-color: #386150;
 }
