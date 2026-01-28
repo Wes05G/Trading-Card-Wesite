@@ -1,0 +1,47 @@
+<html>
+<head>
+    <link rel="stylesheet" href="Style.css">
+    <title>MintPick - The Trading Card Marketplace!</title>
+</head>
+<body>
+    <h1>
+         <a href="index.html"><img src="Images/MintPick Logo .png" alt="MintPick Logo" width="150" height="150"></a>
+    MintPick - The Trading Card Marketplace!
+    </h1>
+    <nav class="navbar">
+            <ul>
+                <li><a href="trades.html">Trades</a></li>
+                <li><a href="newTrade.html"> Start Trade!</a></li>
+                <li><a href="">Pending Trades</a></li>
+                <li class="push-right"><a href="">Login</a></li>
+            </ul>
+    </nav>
+
+    <main>
+        <form action="/trades.html" method="post">
+            <label for="tcname">Type of Card:</label><br>
+            <input type="text" id="tcname" name="tcname"><br>
+            <label for="sibtname">Set it belongs to:</label><br>
+            <input type="text" id="sibtname" name="sibtname"><br>
+            <label for="cname">Name of Card:</label><br>
+            <input type="text" id="cname" name="cname"><br>
+            <label for="grade">Grade:</label><br>
+            <input type="text" id="grade" name="grade"><br>
+            <label for="price">Price:</label><br>
+            <input type="text" id="price" name="price"><br>
+            <label for="status">Status:</label><br>
+            <input type="text" id="status" name="status"><br>
+            <label for="image">Image URL:</label><br>
+            <input type="text" id="image" name="image"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </main>
+
+    <footer>
+        <ul>
+        <li><a href="">About</a></li>
+        <li><a href="">Contact</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
