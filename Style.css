@@ -7,11 +7,11 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
 main {
-    text-align: center; /* keep default main behavior for other pages */
+    text-align: center;
 }
 
-/* Only card details use horizontal layout */
 .card-container {
     display: flex;
     flex-direction: row;
@@ -28,12 +28,8 @@ main {
     gap: 8px;
 }
 
-h1 {
-    text-align: center;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: #685a39;
-    margin: 0%;
-}
+
+
 .navbar ul {
  display: flex;
   justify-content: center;
@@ -42,13 +38,12 @@ h1 {
   margin: 0;
     overflow: hidden;
 }
+
 .navbar {
     background-color: #3d3522;
     overflow: hidden;
 }
-push-right {
-    margin-left: auto;
-}
+
 .navbar a {
     color: #58b09c;
     text-decoration: none;
@@ -56,25 +51,33 @@ push-right {
     display: block;
     text-align: center;
 }
+
 nav a:hover {
     background-color: #386150;
 }
+
 .navbar li {
     float: left;
 }
+
 footer{
-    text-align: center;
+    text-align: left;
     color: #58b09c;
     background-color: #3d3522;
     overflow: hidden;
     margin-top: auto;
+    position: relative;
+    padding-right: 110px;
+    padding-left: 12px;
 }
+
 footer ul {
     list-style-type: none;
     margin: 0px;
     padding: 0px;
     overflow: hidden;
 }
+
 footer a {
     color: #58b09c;
     text-decoration: none;
@@ -82,26 +85,59 @@ footer a {
     display: block;
     text-align: center;
 }
+
 footer a:hover {
     background-color: #386150;
 }
+
 footer li {
-    float: left;
+    float: none;
 }
+
+.footer-right {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.footer-right img {
+    margin-bottom: 0px;
+    display: block;
+}
+.footer-links {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+.footer-links li {
+    display: inline-block;
+}
+
 img{
-    margin-bottom: -45px;
+    margin-bottom: -26.8px;
 }
-li a{
+li .media{
+    padding: 0%;
+    display: block;
+    text-align: right;
+}
+
+li{
     color: #58b09c;
     text-decoration: none;
      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
 li.b{
     list-style-type: none;
     padding: 5px;
     display: block;
     text-align: center;
 }
+
 .button {
     background-color: #3d3522;
     border: none;
@@ -115,12 +151,15 @@ li.b{
     cursor: pointer;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
 .button:hover {
     background-color: #386150;
 }
+
 #cardName, #cardGrade, #cardPrice, #status {
     text-align: left;
 }
+
 .back-button {
     background-color: #3d3522;
     border: none;
@@ -134,6 +173,31 @@ li.b{
     cursor: pointer;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
 .back-button:hover {
     background-color: #386150;
+}
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #3d3522;
+}
+.site-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.site-header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #58b09c;
+}
+.site-header .header-right {
+    display: flex;
+    align-items: center;
+}
+.login-button {
+    padding: 8px 14px;
 }
