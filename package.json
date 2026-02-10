@@ -1,0 +1,25 @@
+{
+  "name": "cpsc-455-projects",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wes05G/CPSC-455-Projects.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Wes05G/CPSC-455-Projects/issues"
+  },
+  "homepage": "https://github.com/Wes05G/CPSC-455-Projects#readme",
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "node-modules": "^1.0.1"
+  }
+}
