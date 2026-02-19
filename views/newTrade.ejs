@@ -1,0 +1,32 @@
+<%- include('partials/header'); %>
+
+<main>
+    <form action="/trades" method="post">
+        <label for="tcname">Type of Card:</label><br>
+        <input type="text" id="tcname" name="tcname"><br>
+
+        <label for="sibtname">Set it belongs to:</label><br>
+        <input type="text" id="sibtname" name="sibtname"><br>
+
+        <label for="cname">Name of Card:</label><br>
+        <input type="text" id="cname" name="cname"><br>
+
+        <label for="grade">Grade:</label><br>
+        <input type="text" id="grade" name="grade"><br>
+
+        <label for="price">Price:</label><br>
+        <input type="text" id="price" name="price"><br>
+
+        <label for="status">Status:</label><br>
+        <input type="text" id="status" name="status"><br>
+
+        <label for="image">Image URL:</label><br>
+        <input type="text" id="image" name="image"><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <button class="back-button" onclick="window.history.back();">← Back</button>
+</main>
+
+<%- include('partials/footer'); %>

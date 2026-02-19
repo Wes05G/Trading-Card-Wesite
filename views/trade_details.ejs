@@ -1,0 +1,21 @@
+<%- include('partials/header'); %>
+
+<main class="card-container">
+    <h2>Card Details</h2>
+
+    <img id="cardImage" src="" alt="Card Image" width="200" height="250">
+
+    <div class="card-info">
+        <p id="cardName"></p>
+        <p id="cardDescription"></p>
+        <p id="cardGrade"></p>
+        <p id="cardPrice"></p>
+        <p id="status"></p>
+    </div>
+
+    <button class="back-button" onclick="window.history.back();">← Back</button>
+</main>
+
+<script src="/trade_details.js"></script>
+
+<%- include('partials/footer'); %>
