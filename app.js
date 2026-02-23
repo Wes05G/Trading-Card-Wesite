@@ -24,15 +24,10 @@ app.get('/trades', (req, res) => {
     res.render('trades', { trades });
 });
 
-// New trade form
-app.get('/new-trade', (req, res) => {
-    res.render('newTrade');
-});
-
 // Create trade (PROCESS form)
 app.post('/create-trade', (req, res) => {
     trades.push(req.body);
-    res.redirect('/trades');
+    res.redirect('/newTrades');
 });
 
 // Pokemon sets
