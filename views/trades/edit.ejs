@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<%- include('../partials/navbar') %>
+
+<main class="card-container">
+    <h2>Card Details</h2>
+
+    <img id="cardImage" src="" alt="Card Image" width="200" height="250">
+
+    <form> 
+        <label for="cardName">Card Name:</label>
+        <input type="text" id="cardName" name="cardName" required>
+
+        <label for="owner">Owner:</label>
+        <input type="text" id="owner" name="owner" required>
+
+        <label for="cardGrade">Card Grade:</label>
+        <input type="text" id="cardGrade" name="cardGrade" required>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="available">Available</option>
+            <option value="pending">Pending</option>
+            <option value="sold">Sold</option>
+        </select>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <button class="back-button" onclick="window.history.back();">← Back</button>
+</main>
+
+<script src="/public/trade_details.js"></script>
+
+<%- include('../partials/footer') %>

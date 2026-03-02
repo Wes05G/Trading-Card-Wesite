@@ -1,0 +1,12 @@
+1. Which route dose the function originate from?
+
+2. Make the route in app.js?
+
+3. How would the api req look like (.get, .put, .post, .delete, ...)?
+
+4. How to implement the Control method?
+    a. Which method in the model do you need?
+    b. Which view are you sending information to?
+    
+5. How do you want to redirect the view?
+    a. To which view page (i.e. which routes)?

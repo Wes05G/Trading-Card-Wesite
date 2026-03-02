@@ -1,20 +1,20 @@
-<%- include('partials/header'); %>
+<%- include('../partials/header'); %>
 
-<%- include('partials/navbar'); %>
+<%- include('../partials/navbar'); %>
 
 <main>
     <form action="/create-trade" method="post">
-        <label for="tcname">Type of Card:</label><br>
-        <input type="text" id="tcname" name="tcname"><br>
+        <label for="set">Set it belongs to:</label><br>
+        <input type="text" id="set" name="set"><br>
 
-        <label for="sibtname">Set it belongs to:</label><br>
-        <input type="text" id="sibtname" name="sibtname"><br>
+        <label for="subSet">Sub Set it belongs to:</label><br>
+        <input type="text" id="subSet" name="subSet"><br>
 
         <label for="cname">Name of Card:</label><br>
-        <input type="text" id="cname" name="cname"><br>
+        <input type="text" id="cardName" name="cardName"><br>
 
         <label for="grade">Grade:</label><br>
-        <input type="text" id="grade" name="grade"><br>
+        <input type="text" id="cardGrade" name="cardGrade"><br>
 
         <label for="price">Price:</label><br>
         <input type="text" id="price" name="price"><br>
@@ -31,4 +31,4 @@
     <button class="back-button" onclick="window.history.back();">← Back</button>
 </main>
 
-<%- include('partials/footer'); %>
+<%- include('../partials/footer'); %>

@@ -1,6 +1,6 @@
-<%- include('partials/header'); %>
+<%- include('../partials/header') %>
 
-<%- include('partials/navbar'); %>
+<%- include('../partials/navbar') %>
 
 <main class="card-container">
     <h2>Card Details</h2>
@@ -9,15 +9,15 @@
 
     <div class="card-info">
         <p id="cardName"></p>
-        <p id="cardDescription"></p>
+        <p id="owner"></p>
         <p id="cardGrade"></p>
-        <p id="cardPrice"></p>
+        <p id="price"></p>
         <p id="status"></p>
     </div>
 
     <button class="back-button" onclick="window.history.back();">← Back</button>
 </main>
 
-<script src="/trade_details.js"></script>
+<script src="/public/trade_details.js"></script>
 
-<%- include('partials/footer'); %>
+<%- include('../partials/footer') %>
