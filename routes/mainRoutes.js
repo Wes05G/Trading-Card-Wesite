@@ -6,6 +6,8 @@ const router = express.Router();
 router.get('/', controller.index);
 router.get('/index', controller.index);
 
+router.get('/newTrade', (req, res) => res.redirect('/trade/new'));
+
 router.get('/trades',controller.trades);
 
 router.get('/megaEvolution', controller.megaEvolution);

@@ -1,34 +1,78 @@
-<%- include('../partials/header'); %>
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
 
-<%- include('../partials/navbar'); %>
+<main class="card-container">
 
-<main>
-    <form action="/create-trade" method="post">
-        <label for="set">Set it belongs to:</label><br>
-        <input type="text" id="set" name="set"><br>
+  <div class="card-info">
+    <h2>Start New Trade</h2>
 
-        <label for="subSet">Sub Set it belongs to:</label><br>
-        <input type="text" id="subSet" name="subSet"><br>
+    <form action="/trade/add" method="POST" class="edit-form">
 
-        <label for="cname">Name of Card:</label><br>
-        <input type="text" id="cardName" name="cardName"><br>
+      <div class="form-row">
+        <label for="cardName"><strong>Card Name:</strong></label>
+        <input type="text" id="cardName" name="cardName" required>
+      </div>
 
-        <label for="grade">Grade:</label><br>
-        <input type="text" id="cardGrade" name="cardGrade"><br>
+      <div class="form-row">
+        <label for="owner"><strong>Owner:</strong></label>
+        <input type="text" id="owner" name="owner" required>
+      </div>
 
-        <label for="price">Price:</label><br>
-        <input type="text" id="price" name="price"><br>
+      <div class="form-row">
+        <label for="cardGrade"><strong>PSA Grade:</strong></label>
+        <input type="text" id="cardGrade" name="cardGrade" required>
+      </div>
 
-        <label for="status">Status:</label><br>
-        <input type="text" id="status" name="status"><br>
+      <div class="form-row">
+        <label for="price"><strong>Price:</strong></label>
+        <input type="text" id="price" name="price" placeholder="$0.00" required>
+      </div>
 
-        <label for="image">Image URL:</label><br>
-        <input type="text" id="image" name="image"><br>
+      <div class="form-row">
+        <label for="status"><strong>Status:</strong></label>
+        <select id="status" name="status">
+          <option value="open">Open</option>
+          <option value="pending">Pending</option>
+          <option value="sold">Sold</option>
+        </select>
+      </div>
 
-        <input type="submit" value="Submit">
+      <div class="form-row">
+        <label for="Set"><strong>Set:</strong></label>
+        <select id="Set" name="Set">
+          <option value="megaEvolution">Mega Evolution</option>
+          <option value="scarletViolet">Scarlet & Violet</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="subSet"><strong>Sub Set:</strong></label>
+        <select id="subSet" name="subSet">
+          <option value="megaEvolutions">Mega Evolutions</option>
+          <option value="phantasmalFlames">Phantasmal Flames</option>
+          <option value="blackBolt">Black Bolt</option>
+          <option value="whiteFlare">White Flare</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="image"><strong>Image Filename:</strong></label>
+        <input type="text" id="image" name="image" placeholder="example.jpg">
+      </div>
+
+      <div class="form-actions">
+        <button class="button" type="submit">Create Trade</button>
+      </div>
+
     </form>
 
     <button class="back-button" onclick="window.history.back();">← Back</button>
+  </div>
+
+  <div>
+    <p><em>Image preview will appear after saving.</em></p>
+  </div>
+
 </main>
 
-<%- include('../partials/footer'); %>
+<%- include('../partials/footer') %>
