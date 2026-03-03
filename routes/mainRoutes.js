@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', controller.index);
 router.get('/index', controller.index);
 
-router.get('/trades', (req, res) => res.redirect('/trades'));
+router.get('/trades',controller.trades);
 
 router.get('/megaEvolution', controller.megaEvolution);
 // Mega Evolution Subsets / Cards

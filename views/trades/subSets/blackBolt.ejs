@@ -6,15 +6,11 @@
     <h1>Black Bolt</h1>
     <h3>Choose your card:</h3>
 
- <img src="<%= trade.image %>" alt="<%= trade.cardName %>" width="200" height="250">
-
-<div class="card-info">
-  <p>Card Name: <%= trade.cardName %></p>
-  <p>Owner: <%= trade.owner %></p>
-  <p>PSA Grade: <%= trade.cardGrade %></p>
-  <p>Price: <%= trade.price %></p>
-  <p>Status: <%= trade.status %></p>
-</div>
+    <% trades.forEach(t => { %>
+  <a href="/trade/<%= t.id %>">
+    <img src="/Images/<%= t.image %>" alt="<%= t.cardName %>" width="110" height="150">
+  </a>
+<% }) %>
 
     <button class="back-button" onclick="window.history.back();">← Back</button>
 </main>

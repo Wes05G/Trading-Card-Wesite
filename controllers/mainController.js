@@ -1,7 +1,6 @@
 exports.index = (req,res)=>{
   res.render('trades/index');
 };
-
 exports.about = (req,res)=>{
   res.render('trades/about');
 };

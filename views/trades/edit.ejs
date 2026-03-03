@@ -1,38 +1,58 @@
 <%- include('../partials/header') %>
-
 <%- include('../partials/navbar') %>
 
 <main class="card-container">
-    <h2>Card Details</h2>
 
-    <img id="cardImage" src="" alt="Card Image" width="200" height="250">
+  <div class="card-info">
+    <h2>Edit Card</h2>
 
-    <form> 
-        <label for="cardName">Card Name:</label>
-        <input type="text" id="cardName" name="cardName" required>
+    <form action="/trade/edit/<%= trade.id %>" method="POST" class="edit-form">
 
-        <label for="owner">Owner:</label>
-        <input type="text" id="owner" name="owner" required>
+      <div class="form-row">
+        <label for="cardName"><strong>Card Name:</strong></label>
+        <input type="text" id="cardName" name="cardName" value="<%= trade.cardName %>" required>
+      </div>
 
-        <label for="cardGrade">Card Grade:</label>
-        <input type="text" id="cardGrade" name="cardGrade" required>
+      <div class="form-row">
+        <label for="owner"><strong>Owner:</strong></label>
+        <input type="text" id="owner" name="owner" value="<%= trade.owner %>" required>
+      </div>
 
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" required>
+      <div class="form-row">
+        <label for="cardGrade"><strong>PSA Grade:</strong></label>
+        <input type="text" id="cardGrade" name="cardGrade" value="<%= trade.cardGrade %>" required>
+      </div>
 
-        <label for="status">Status:</label>
+      <div class="form-row">
+        <label for="price"><strong>Price:</strong></label>
+        <input type="text" id="price" name="price" value="<%= trade.price %>" required>
+      </div>
+
+      <div class="form-row">
+        <label for="status"><strong>Status:</strong></label>
         <select id="status" name="status">
-            <option value="available">Available</option>
-            <option value="pending">Pending</option>
-            <option value="sold">Sold</option>
+          <option value="open" <%= trade.status === 'open' ? 'selected' : '' %>>Open</option>
+          <option value="pending" <%= trade.status === 'pending' ? 'selected' : '' %>>Pending</option>
+          <option value="sold" <%= trade.status === 'sold' ? 'selected' : '' %>>Sold</option>
         </select>
+      </div>
 
-        <button type="submit">Save Changes</button>
+      <div class="form-actions">
+        <button class="button" type="submit">Save Changes</button>
+      </div>
     </form>
 
     <button class="back-button" onclick="window.history.back();">← Back</button>
-</main>
+  </div>
 
-<script src="/public/trade_details.js"></script>
+  <div>
+    <% if (trade && trade.image) { %>
+      <img src="/Images/<%= trade.image %>" alt="<%= trade.cardName %>" width="260">
+    <% } else { %>
+      <p><em>No image on file for this card.</em></p>
+    <% } %>
+  </div>
+
+</main>
 
 <%- include('../partials/footer') %>

@@ -1,25 +1,35 @@
 <%- include('../partials/header') %>
-
 <%- include('../partials/navbar') %>
 
 <main class="card-container">
-    <h2>Card Details</h2>
 
-    <img id="cardImage" src="" alt="Card Image" width="200" height="250">
+  <div class="card-info">
+    <p id="cardName"><strong>Card Name:</strong> <%= trade.cardName %></p>
+    <p id="owner"><strong>Owner:</strong> <%= trade.owner %></p>
+    <p id="cardGrade"><strong>PSA Grade:</strong> <%= trade.cardGrade %></p>
+    <p id="price"><strong>Price:</strong> <%= trade.price %></p>
+    <p id="status"><strong>Status:</strong> <%= trade.status %></p>
+    <p><strong>Set:</strong> <%= trade.Set %></p>
+    <p><strong>Sub Set:</strong> <%= trade.subSet %></p>
 
-    <div class="card-info">
-        <p id="cardName"></p>
-        <p id="owner"></p>
-        <p id="cardGrade"></p>
-        <p id="price"></p>
-        <p id="status"></p>
-        <p id="set"></p>
-        <p id="subSet"></p>
+    <div>
+      <a class="button" href="/trade/<%= trade.id %>/edit">Edit</a>
+      <form action="/trade/delete/<%= trade.id %>" method="POST" style="display:inline;">
+        <button class="button" type="submit" onclick="return confirm('Delete this card?');">Delete</button>
+      </form>
     </div>
 
     <button class="back-button" onclick="window.history.back();">← Back</button>
-</main>
+  </div>
 
-<script src="/trade_details.js"></script>
+  <div>
+    <% if (trade && trade.image) { %>
+      <img src="/Images/<%= trade.image %>" alt="<%= trade.cardName %>" width="260" height="auto">
+    <% } else { %>
+      <p><em>No image on file for this card.</em></p>
+    <% } %>
+  </div>
+
+</main>
 
 <%- include('../partials/footer') %>
