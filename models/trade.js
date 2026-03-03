@@ -155,65 +155,48 @@ exports.save = (newtrade) => {
   if (newtrade.Set && !Set.includes(newtrade.Set)) {
     Set.push(newtrade.Set);
   }
-
   // Add new subset if needed
   if (newtrade.subSet && !subSet.includes(newtrade.subSet)) {
     subSet.push(newtrade.subSet);
   }
-
   // Auto-generate an id if missing
   if (!newtrade.id) {
     const maxId = trades.reduce((max, t) => Math.max(max, Number(t.id)), 0);
     newtrade.id = String(maxId + 1);
   }
-
+  if(newtrade.set && !newtrade.Set){
+    newtrade.Set = newtrade.set;
+  }
+    if(newtrade.subset && !newtrade.subSet){
+    newtrade.subSet = newtrade.subset;
+  }
   // Add the trade/card to trades list
   trades.push(newtrade);
 
   // return the saved trade 
   return newtrade;
 };
-
 //update a card
-exports.updatebyId = (id, newtrade) => {
-    //add to categories if needed
-     // Find existing trade
-  const trade = trades.find(t => t.id === id);
+exports.updateById = (id, newtrade) => {
 
-  if (!trade) {
-    return null; // not found
-  }
+  if (newtrade.set && !newtrade.Set) newtrade.Set = newtrade.set;
+  if (newtrade.subset && !newtrade.subSet) newtrade.subSet = newtrade.subset;
 
-  // Add new set if needed
-  if (newtrade.Set && !Set.includes(newtrade.Set)) {
-    Set.push(newtrade.Set);
-  }
+  const index = trades.findIndex(trade => trade.id === id);
+  if (index === -1) return false;
 
-  // Add new subset if needed
-  if (newtrade.subSet && !subSet.includes(newtrade.subSet)) {
-    subSet.push(newtrade.subSet);
-  }
-
-  // Never allow ID to change
-  newtrade.id = id;
-
-  // Update fields
-  Object.assign(trade, newtrade);
-
-  console.log(trades);
-  return trade;
+  trades[index] = { ...trades[index], ...newtrade, id };
+  return true;
 };
 //delete a card
-exports.deletebyId = (id) => {
-    //finds the card 
+exports.deleteById = (id) => {
     const index = trades.findIndex(trade => trade.id === id);
-    //delete the id (the card)
-    trades.splice(index,1);
-    //console.log(trades);
-    return trades;
+    if (index === -1) return false;
+    trades.splice(index, 1);
+    return true;
 };
 
-exports.deletebyIds = (ids) => {
+exports.deleteByIds = (ids) => {
     //loop with id
     ids.forEach(id => {
         const index = trades.findIndex(trade => trade.id === id);

@@ -1,52 +1,38 @@
-const model = require('../models/trade')
+const model = require('../models/trade');
 
-exports.trades = (req, res) => {
-    res.render('trades/trades')
+exports.details = (req, res) => {
+  const id = req.params.id;
+  const trade = model.findById(id);
+  if (!trade) return res.status(404).send(`Trade with id ${id} not found`);
+  res.render('trades/trade', { trade });
 };
 
- exports.index = (req,res)=>{
-    let categories = model.findSet();
-    let subCategories = model.findsubSet();
-    let trades = model.findTrades();
-    res.render('/trades/trades',{categories, subCategories, trades}); 
-    //we call on the view now after making calls to the model and extracting the information we need.
+exports.new = (req, res) => {
+  res.render('trades/newTrade');
 };
 
-exports.megaEvolution = (req,res)=>{
-    let categories = model.findSet();
-    let subCategories = model.findsubSet();
-    let trades = model.findTradesBySet('megaEvolution');
-    res.render('/trades/megaEvolution',{categories, subCategories, trades}); 
+exports.add = (req, res) => {
+  model.save(req.body);
+  res.redirect('/trades');
 };
 
-exports.scarletViolet = (req,res)=>{
-    let categories = model.findSet();
-    let subCategories = model.findsubSet();
-    let trades = model.findTradesBySet('scarletViolet');
-    res.render('/trades/scarletViolet',{categories, subCategories, trades}); 
+exports.edit = (req, res) => {
+  const id = req.params.id;
+  const trade = model.findById(id);
+  if (!trade) return res.status(404).send(`Trade with id ${id} not found`);
+  res.render('trades/edit', { trade });
 };
 
-exports.edit = (req,res)=>{
-    let id = req.params.id;
-    let trade = model.findById(id);
-    res.render('/trades/edit',{trade});
-}
+exports.update = (req, res) => {
+  const id = req.params.id;
+  const updated = model.updateById(id, req.body);
+  if (!updated) return res.status(404).send(`Trade with id ${id} not found`);
+  res.redirect(`/trade/${id}`);
+};
 
-exports.update = (req,res)=>{
-    let id = req.params.id;
-    let newtrade = req.body;
-    model.updatebyId(id, newtrade);
-    res.redirect('/trades');
-}
-
-exports.add = (req,res)=>{
-    let newtrade = req.body;
-    model.add(newtrade);
-    res.redirect('/trades');
-}
-
-exports.delete = (req,res)=>{
-    let id = req.params.id;
-    model.deleteById(id);
-    res.redirect('/trades');
-}
+exports.delete = (req, res) => {
+  const id = req.params.id;
+  const ok = model.deleteById(id);
+  if (!ok) return res.status(404).send(`Trade with id ${id} not found`);
+  res.redirect('/trades');
+};
