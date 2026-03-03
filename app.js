@@ -8,15 +8,15 @@ const tradeRoutes = require('./routes/tradeRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use('/trade', tradeRoutes);
+
 app.use('/', mainRoutes);
-
-app.use('/trades',tradeRoutes);
-
 /*
 // let trades = [];
 

@@ -18,7 +18,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Zekrom_ex_172.jpg',
         price: '$1000',
         Set: 'scarletViolet',
         subSet: 'blackBolt'
@@ -29,7 +29,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Victini.jpg',
         price: '$1000',
         Set: 'scarletViolet',
         subSet: 'blackBolt'
@@ -40,7 +40,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Seismitoad105.jpg',
         price: '$1000',
         Set: 'scarletViolet',
         subSet: 'blackBolt'
@@ -51,7 +51,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Reshiram_ex_173.jpg',
         price: '$1000',
         Set: 'scarletViolet',
         subSet: 'whiteFlare'
@@ -62,7 +62,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Reshiram_ex_166.jpg',
         price: '$1000',
         Set: 'scarletViolet',
         subSet: 'whiteFlare'
@@ -73,7 +73,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Victini.jpg',
         price: '$1000',
         Set: 'scarletViolet',
         subSet: 'whiteFlare'
@@ -84,7 +84,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Mega_Lucario_ex_188.jpg',
         price: '$1000',
         Set: 'megaEvolution',
         subSet: 'megaEvolutions'
@@ -95,7 +95,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Mega_Gardevoir_ex_187.jpg',
         price: '$1000',
         Set: 'megaEvolution',
         subSet: 'megaEvolutions'
@@ -106,7 +106,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Mega_Lucario_ex_179.jpg',
         price: '$1000',
         Set: 'megaEvolution',
         subSet: 'megaEvolutions'
@@ -117,7 +117,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Mega_Charizard_X_ex_125.jpg',
         price: '$1000',
         Set: 'megaEvolution',
         subSet: 'phantasmalFlames'
@@ -128,7 +128,7 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Mega_Charizard_X_ex_109.jpg',
         price: '$1000',
         Set: 'megaEvolution',
         subSet: 'phantasmalFlames'
@@ -139,14 +139,14 @@ const trades = [
         owner: 'wesley',
         cardGrade: '10',
         status: 'open',
-        image: '',
+        image: 'Mega_Charizard_X_ex_130.jpg',
         price: '$1000',
         Set: 'megaEvolution',
         subSet: 'phantasmalFlames'
     },
 ];
 //search for a specific card via their id
-const findbyId = (id) => {
+exports.findById = (id) => {
     return trades.find(trade => trade.id === id);
 };
 //save and add a new card to the trades
@@ -175,7 +175,7 @@ exports.save = (newtrade) => {
 };
 
 //update a card
-const updatebyId = (id, newtrade) => {
+exports.updatebyId = (id, newtrade) => {
     //add to categories if needed
      // Find existing trade
   const trade = trades.find(t => t.id === id);
@@ -240,6 +240,6 @@ exports.findTradesBySubSet = (subSet) => {
     return trades.filter(trades => trades.subSet === subSet)
 };
 
-exports.
+
 //console.log(findbyId('1'));
 // console.log(updatebyId('1', {cardName: 'Zekrom ex 172', owner: 'Karter', cardGrade: '10', status: 'open', image: '', price: '$1000', Set: 'scarletViolet', subSet: 'black-bolt'}));

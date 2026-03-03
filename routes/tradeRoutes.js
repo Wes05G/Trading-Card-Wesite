@@ -1,23 +1,15 @@
 const express = require('express');
-const controller = require('../controllers/tradeController')
+const controller = require('../controllers/tradeController');
+
 const router = express.Router();
 
-
-router.get('/', controller.index);
-
-router.get('/megaEvolution', controller.megaEvolution);
-
-router.get('/scarletViolet', controller.scarletViolet);
-
-router.get('/:id', controller.edit)
-
+router.get('/new', controller.new);
 router.post('/add', controller.add);
 
-router.post('/edit/:id', controller.update);
+router.get('/:id', controller.details);
+router.get('/:id/edit', controller.edit);
 
+router.post('/edit/:id', controller.update);
 router.post('/delete/:id', controller.delete);
 
-
 module.exports = router;
-
-//add "delete", "add", and "edit/update" 

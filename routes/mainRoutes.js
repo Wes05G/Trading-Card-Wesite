@@ -4,22 +4,19 @@ const controller = require("../controllers/mainController");
 const router = express.Router();
 
 router.get('/', controller.index);
+router.get('/index', controller.index);
 
-router.get('/index',controller.index);
-
-//router.get('/about', constroller.about);
-
-//router.get('/contact', controller.contact);
-
-router.get('/trades', controller.trades);
+router.get('/trades', (req, res) => res.redirect('/trades'));
 
 router.get('/megaEvolution', controller.megaEvolution);
-    //Mega Evolution Suset and Cards
-    router.get('/megaEvolutions', controller.cards);
+// Mega Evolution Subsets / Cards
+router.get('/megaEvolutions', controller.MEcards);
+router.get('/phantasmalFlames', controller.PFcards);
 
 router.get('/scarletViolet', controller.scarletViolet);
-    //Scarlet Violet Subset and Cards
+// Scarlet & Violet Subsets / Cards
+router.get('/blackBolt', controller.BBcards);
+router.get('/whiteFlare', controller.WFcards);
 
-router.get('/trade-detials/:id', controller.cards);
 
 module.exports = router;

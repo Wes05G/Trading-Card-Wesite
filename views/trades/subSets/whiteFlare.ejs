@@ -6,17 +6,11 @@
     <h1>White Flare</h1>
     <h3>Choose your card:</h3>
 
-    <a href="/trade-details?name=Reshiram%20ex%20173&grade=10&price=740&image=Reshiram_ex_173.jpg&status=Available">
-        <img src="/Images/Reshiram_ex_173.jpg" alt="Reshiram ex 173" width="110" height="150">
-    </a>
-
-    <a href="/trade-details?name=Reshiram%20ex%20166&grade=10&price=343&image=Reshiram_ex_166.jpg&status=Available">
-        <img src="/Images/Reshiram_ex_166.jpg" alt="Reshiram ex 166" width="110" height="150">
-    </a>
-
-    <a href="/trade-details?name=Victini%20171&grade=10&price=812&image=Victini.jpg&status=Available">
-        <img src="/Images/Victini.jpg" alt="Victini 171" width="110" height="150">
-    </a>
+    <% trades.forEach(t => { %>
+  <a href="/trade/<%= t.id %>">
+    <img src="/Images/<%= t.image %>" alt="<%= t.cardName %>" width="110" height="150">
+  </a>
+<% }) %>
 
     <button class="back-button" onclick="window.history.back();">← Back</button>
 </main>

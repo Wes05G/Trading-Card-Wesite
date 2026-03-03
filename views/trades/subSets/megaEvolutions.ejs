@@ -6,18 +6,11 @@
     <h1>Mega Evolution Cards</h1>
     <h3>Choose your card:</h3>
 
-    <a href="/trade-details?name=Mega%20Lucario%20ex%20188&grade=10&price=978&image=Mega_Lucario_ex_188.jpg&status=Available">
-        <img src="/Images/Mega_Lucario_ex_188.jpg" alt="Mega Lucario ex 188" width="110" height="150">
-    </a>
-
-    <a href="/trade-details?name=Mega%20Gardevoir%20ex%20187&grade=10&price=675&image=Mega_Gardevoir_ex_187.jpg&status=Available">
-        <img src="/Images/Mega_Gardevoir_ex_187.jpg" alt="Mega Gardevoir ex 187" width="110" height="150">
-    </a>
-
-    <a href="/trade-details?name=Mega%20Lucario%20ex%20179&grade=10&price=345&image=Mega_Lucario_ex_179.jpg&status=Available">
-        <img src="/Images/Mega_Lucario_ex_179.jpg" alt="Mega Lucario ex 179" width="110" height="150">
-    </a>
-
+   <% trades.forEach(t => { %>
+  <a href="/trade/<%= t.id %>">
+    <img src="/Images/<%= t.image %>" alt="<%= t.cardName %>" width="110" height="150">
+  </a>
+<% }) %>
     <button class="back-button" onclick="window.history.back();">← Back</button>
 </main>
 
