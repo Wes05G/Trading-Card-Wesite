@@ -226,3 +226,6 @@ exports.findTradesBySubSet = (subSet) => {
 
 //console.log(findbyId('1'));
 // console.log(updatebyId('1', {cardName: 'Zekrom ex 172', owner: 'Karter', cardGrade: '10', status: 'open', image: '', price: '$1000', Set: 'scarletViolet', subSet: 'black-bolt'}));
+//save({cardName: 'Zekrom ex 12312323', owner: 'Karter', cardGrade: '10', status: 'open', image: '', price: '$1000', Set: 'scarletViolet', subSet: 'black-bolt'});
+
+
