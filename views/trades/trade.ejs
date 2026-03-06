@@ -13,8 +13,8 @@
     <p><strong>Sub Set:</strong> <%= trade.subSet %></p>
 
     <div>
-      <a class="button" href="/trade/<%= trade.id %>/edit">Edit</a>
-      <form action="/trade/delete/<%= trade.id %>" method="POST" style="display:inline;">
+      <a class="button" href="/trades/<%= trade.id %>/edit">Edit</a>
+      <form action="/trades/delete/<%= trade.id %>" method="POST" style="display:inline;">
         <button class="button" type="submit" onclick="return confirm('Delete this card?');">Delete</button>
       </form>
     </div>
