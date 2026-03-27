@@ -11,146 +11,39 @@ const subSet = [
   'phantasmalFlames'   
 ];
 //the details of the cards
-const trades = [
-    {
-        id: '1',
-        cardName: 'Zekrom ex 172',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Zekrom_ex_172.jpg',
-        price: '$1000',
-        Set: 'scarletViolet',
-        subSet: 'blackBolt'
-    },
-    {
-        id: '2',
-        cardName: 'Victini',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Victini.jpg',
-        price: '$1000',
-        Set: 'scarletViolet',
-        subSet: 'blackBolt'
-    },
-    {
-        id: '3',
-        cardName: 'Seismitoad 105',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Seismitoad105.jpg',
-        price: '$1000',
-        Set: 'scarletViolet',
-        subSet: 'blackBolt'
-    },
-    {
-        id: '4',
-        cardName: 'Reshiram ex 173',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Reshiram_ex_173.jpg',
-        price: '$1000',
-        Set: 'scarletViolet',
-        subSet: 'whiteFlare'
-    },
-    {
-        id: '5',
-        cardName: 'Reshiram ex 166',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Reshiram_ex_166.jpg',
-        price: '$1000',
-        Set: 'scarletViolet',
-        subSet: 'whiteFlare'
-    },
-    {
-        id: '6',
-        cardName: 'Victini',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Victini.jpg',
-        price: '$1000',
-        Set: 'scarletViolet',
-        subSet: 'whiteFlare'
-    },
-    {
-        id: '7',
-        cardName: 'Mega Lucario ex 188',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Mega_Lucario_ex_188.jpg',
-        price: '$1000',
-        Set: 'megaEvolution',
-        subSet: 'megaEvolutions'
-    },
-    {
-        id: '8',
-        cardName: 'Mega Gardevoir ex 187',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Mega_Gardevoir_ex_187.jpg',
-        price: '$1000',
-        Set: 'megaEvolution',
-        subSet: 'megaEvolutions'
-    },
-    {
-        id: '9',
-        cardName: 'Mega Lucario ex 179',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Mega_Lucario_ex_179.jpg',
-        price: '$1000',
-        Set: 'megaEvolution',
-        subSet: 'megaEvolutions'
-    },
-    {
-        id: '10',
-        cardName: 'Mega Charizard X ex 125',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Mega_Charizard_X_ex_125.jpg',
-        price: '$1000',
-        Set: 'megaEvolution',
-        subSet: 'phantasmalFlames'
-    },
-    {
-        id: '11',
-        cardName: 'Mega Charizard X ex 109',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Mega_Charizard_X_ex_109.jpg',
-        price: '$1000',
-        Set: 'megaEvolution',
-        subSet: 'phantasmalFlames'
-    },
-    {
-        id: '12',
-        cardName: 'Mega Charizard X ex 130',
-        owner: 'wesley',
-        cardGrade: '10',
-        status: 'open',
-        image: 'Mega_Charizard_X_ex_130.jpg',
-        price: '$1000',
-        Set: 'megaEvolution',
-        subSet: 'phantasmalFlames'
-    },
-];
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const fs = require('fs');
+
+const tradeSchema = new Schema({
+    id: { type: String, required: true, unique: true },
+    cardName: { type: String, required: true },
+    owner: { type: String, required: true },
+    cardGrade: { type: String, required: true },
+    status: { type: String, required: true },
+    image: { type: String },
+    price: { type: String, required: true },
+    Set: { type: String, required: true },
+    subSet: { type: String }
+});
+
+const Trade = mongoose.model('Trade', tradeSchema);
+
+// Load trades from JSON file
+let trades = [];
+try {
+    trades = JSON.parse(fs.readFileSync('./trades.json', 'utf8'));
+} catch (err) {
+    console.error('Error loading trades.json:', err);
+    trades = [];
+}
+
 //search for a specific card via their id
-exports.findById = (id) => {
+const findById = (id) => {
     return trades.find(trade => trade.id === id);
 };
 //save and add a new card to the trades
-exports.save = (newtrade) => {
+const save = (newtrade) => {
     // Add new set if needed
   if (newtrade.Set && !Set.includes(newtrade.Set)) {
     Set.push(newtrade.Set);
@@ -173,11 +66,14 @@ exports.save = (newtrade) => {
   // Add the trade/card to trades list
   trades.push(newtrade);
 
+  // Save to JSON file
+  fs.writeFileSync('./trades.json', JSON.stringify(trades, null, 2));
+
   // return the saved trade 
   return newtrade;
 };
 //update a card
-exports.updateById = (id, newtrade) => {
+const updateById = (id, newtrade) => {
 
   if (newtrade.set && !newtrade.Set) newtrade.Set = newtrade.set;
   if (newtrade.subset && !newtrade.subSet) newtrade.subSet = newtrade.subset;
@@ -186,17 +82,25 @@ exports.updateById = (id, newtrade) => {
   if (index === -1) return false;
 
   trades[index] = { ...trades[index], ...newtrade, id };
+
+  // Save to JSON file
+  fs.writeFileSync('./trades.json', JSON.stringify(trades, null, 2));
+
   return true;
 };
 //delete a card
-exports.deleteById = (id) => {
+const deleteById = (id) => {
     const index = trades.findIndex(trade => trade.id === id);
     if (index === -1) return false;
     trades.splice(index, 1);
+
+    // Save to JSON file
+    fs.writeFileSync('./trades.json', JSON.stringify(trades, null, 2));
+
     return true;
 };
 
-exports.deleteByIds = (ids) => {
+const deleteByIds = (ids) => {
     //loop with id
     ids.forEach(id => {
         const index = trades.findIndex(trade => trade.id === id);
@@ -204,28 +108,48 @@ exports.deleteByIds = (ids) => {
         trades.splice(index,1);
     });
     //console.log(trades);
+
+    // Save to JSON file
+    fs.writeFileSync('./trades.json', JSON.stringify(trades, null, 2));
+
     return trades;
 };
 
-exports.findSet = () => {
+const findSet = () => {
     return Set;
 };
 
-exports.findsubSet = () => {
+const findsubSet = () => {
     return subSet;
 };
 
-exports.findTradesBySet = (Set) => {
-    return trades.filter(trades => trades.Set === Set)
+const findTradesBySet = (set) => {
+    return trades.filter(trade => trade.Set === set);
 };
 
-exports.findTradesBySubSet = (subSet) => {
-    return trades.filter(trades => trades.subSet === subSet)
+const findTradesBySubSet = (subSetParam) => {
+    return trades.filter(trade => trade.subSet === subSetParam);
 };
 
-
-//console.log(findbyId('1'));
-// console.log(updatebyId('1', {cardName: 'Zekrom ex 172', owner: 'Karter', cardGrade: '10', status: 'open', image: '', price: '$1000', Set: 'scarletViolet', subSet: 'black-bolt'}));
-//save({cardName: 'Zekrom ex 12312323', owner: 'Karter', cardGrade: '10', status: 'open', image: '', price: '$1000', Set: 'scarletViolet', subSet: 'black-bolt'});
-
-
+module.exports = {
+    Trade,
+    findById,
+    save,
+    updateById,
+    deleteById,
+    deleteByIds,
+    findSet,
+    findsubSet,
+};
+module.exports = {
+    Trade,
+    findById,
+    save,
+    updateById,
+    deleteById,
+    deleteByIds,
+    findSet,
+    findsubSet,
+    findTradesBySet,
+    findTradesBySubSet
+};

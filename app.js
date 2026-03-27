@@ -7,6 +7,16 @@ const PORT = 3000;
 const tradeRoutes = require('./routes/tradeRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 
+//connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/tradesDB', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(()=>{
+        app.listen(prototype,host,()=>{
+            console.log("Server is running on prot", prot);
+        })
+    })
+    .catch(err=>console.log(err.message));
+
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
