@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const fs = require('fs');
+
 //the sets of Pkm cards
 const Set =[
 'megaEvolution',
@@ -11,9 +15,6 @@ const subSet = [
   'phantasmalFlames'   
 ];
 //the details of the cards
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const fs = require('fs');
 
 const tradeSchema = new Schema({
     id: { type: String, required: true, unique: true },
@@ -21,15 +22,16 @@ const tradeSchema = new Schema({
     owner: { type: String, required: true },
     cardGrade: { type: String, required: true },
     status: { type: String, required: true },
-    image: { type: String },
+    image: { type: String, required: true },
     price: { type: String, required: true },
     Set: { type: String, required: true },
-    subSet: { type: String }
-});
+    subSet: { type: String, required: true },
+    }, { id: false });
 
-const Trade = mongoose.model('Trade', tradeSchema);
+module.exports = mongoose.model('Card', tradeSchema, 'Card');
 
 // Load trades from JSON file
+/*
 let trades = [];
 try {
     trades = JSON.parse(fs.readFileSync('./trades.json', 'utf8'));
@@ -153,3 +155,4 @@ module.exports = {
     findTradesBySet,
     findTradesBySubSet
 };
+*/

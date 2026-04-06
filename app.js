@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const app = express();
 const PORT = 3000;
@@ -8,10 +9,10 @@ const tradeRoutes = require('./routes/tradeRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 
 //connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/tradesDB', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/Trades')
     .then(()=>{
-        app.listen(prototype,host,()=>{
-            console.log("Server is running on prot", prot);
+        app.listen(PORT, ()=>{
+            console.log("Server is running on port", PORT);
         })
     })
     .catch(err=>console.log(err.message));
@@ -88,6 +89,3 @@ app.get('/contact', (req, res) => {
 
 //-- Server --
 */
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
