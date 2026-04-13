@@ -3,9 +3,7 @@ const model = require('../models/trade');
 exports.details = async (req, res) => {
   try {
     const id = Number(req.params.id);
-    console.log("Searching for id:", id, "type:", typeof id);
     const trade = await model.findOne({ id: id });
-    console.log("Result:", trade);
     if (!trade) return res.status(404).send(`Trade with id ${id} not found`);
     res.render('trades/trade', { trade });
   } catch (err) {

@@ -28,6 +28,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/trades', tradeRoutes);
 
 app.use('/', mainRoutes);
+
+app.use('/users', userRoutes);
+
+
+
 /*
 // let trades = [];
 

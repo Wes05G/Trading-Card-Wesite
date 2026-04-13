@@ -2,18 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const fs = require('fs');
 
-//the sets of Pkm cards
-const Set =[
-'megaEvolution',
-'scarletViolet',
-];
-//the sub sets of Pkm cards
-const subSet = [
-  'blackBolt',
-  'whiteFlare',
-  'megaEvolutions',
-  'phantasmalFlames'   
-];
 //the details of the cards
 
 const tradeSchema = new Schema({
