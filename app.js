@@ -6,6 +6,8 @@ const app = express();
 const PORT = 3000;
 
 const session = require('express-session');
+const { MongoStore } = require('connect-mongo');
+
 const tradeRoutes = require('./routes/tradeRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -21,10 +23,14 @@ mongoose.connect('mongodb://localhost:27017/Trades')
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+
+//connect and store sessions in MongoDB
 app.use(session({
     secret: 'cpsc455-secret',
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore({ mongoUrl: 'mongodb://localhost:27017/Trades'}),
+        cookie: { maxAge: 1000 * 60 * 60 * 24}
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -32,10 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+//Calling the routes
 app.use('/trades', tradeRoutes);
-
 app.use('/', mainRoutes);
-
 app.use('/users', userRoutes);
 
 
