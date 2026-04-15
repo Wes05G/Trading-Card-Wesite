@@ -6,13 +6,15 @@
     <h1>Black Bolt</h1>
     <h3>Choose your card:</h3>
 
-    <% trades.forEach(t => { %>
-  <a href="/trades/<%= t.id %>">
-    <img src="/Images/<%= t.image %>" alt="<%= t.cardName %>" width="110" height="150">
-  </a>
-<% }) %>
-
-    <button class="back-button" onclick="window.history.back();">← Back</button>
+    <div class="card-grid">
+        <% trades.forEach(t => { %>
+            <a href="/trades/<%= t.id %>" class="card-thumb">
+                <img src="/Images/<%= t.image %>" alt="<%= t.cardName %>" width="110" height="150">
+                <p class="card-thumb-name"><%= t.cardName %></p>
+            </a>
+        <% }) %>
+    </div>
+    <button class="button" onclick="window.history.back();">← Back</button>
 </main>
 
 <%- include('../../partials/footer') %>
