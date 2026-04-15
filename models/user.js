@@ -1,13 +1,12 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
 const userSchema = new Schema({
-    id: { type: String, required: true, unique: true },
-    cardName: { type: String, required: true },
-    owner: { type: String, required: true },
-    cardGrade: { type: String, required: true },
-    status: { type: String, required: true },
-    image: { type: String, required: true },
-    price: { type: String, required: true },
-    Set: { type: String, required: true },
-    subSet: { type: String, required: true },
+    id: { type: String, required: true, unique: true, default: () => new mongoose.Types.ObjectId().toString() },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    name: { type: String, required: true },
+    image: { type: String,},
     }, { id: false });
 
 module.exports = mongoose.model('User', userSchema, 'User');

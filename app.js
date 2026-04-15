@@ -5,8 +5,10 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = 3000;
 
+const session = require('express-session');
 const tradeRoutes = require('./routes/tradeRoutes');
 const mainRoutes = require('./routes/mainRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 //connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/Trades')
@@ -19,6 +21,11 @@ mongoose.connect('mongodb://localhost:27017/Trades')
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: 'cpsc455-secret',
+    resave: false,
+    saveUninitialized: false,
+}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 

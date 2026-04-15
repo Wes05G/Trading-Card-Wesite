@@ -2,13 +2,13 @@ const model = require('../models/trade');
 
 exports.details = async (req, res) => {
   try {
-    const id = Number(req.params.id);
+    const id = String(req.params.id);
     const trade = await model.findOne({ id: id });
-    if (!trade) return res.status(404).send(`Trade with id ${id} not found`);
+    if (!trade) return res.status(404).render('trades/error', { status: 404, message: `Trade with id ${id} not found` });
     res.render('trades/trade', { trade });
   } catch (err) {
     console.error("DETAILS ERROR:", err.message);
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -21,7 +21,7 @@ exports.add = async (req, res) => {
     await model.create(req.body);
     res.redirect('/trades');
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -29,10 +29,10 @@ exports.edit = async (req, res) => {
   try {
     const id = String(req.params.id);
     const trade = await model.findOne({ id: id });
-    if (!trade) return res.status(404).send(`Trade with id ${id} not found`);
+    if (!trade) return res.status(404).render('trades/error', { status: 404, message: `Trade with id ${id} not found` });
     res.render('trades/edit', { trade });
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -40,10 +40,10 @@ exports.update = async (req, res) => {
   try {
     const id = String(req.params.id);
     const updated = await model.findOneAndUpdate({ id: id }, req.body);
-    if (!updated) return res.status(404).send(`Trade with id ${id} not found`);
+    if (!updated) return res.status(404).render('trades/error', { status: 404, message: `Trade with id ${id} not found` });
     res.redirect(`/trades/${id}`);
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -51,10 +51,10 @@ exports.delete = async (req, res) => {
   try {
     const id = String(req.params.id);
     const ok = await model.findOneAndDelete({ id: id });
-    if (!ok) return res.status(404).send(`Trade with id ${id} not found`);
+    if (!ok) return res.status(404).render('trades/error', { status: 404, message: `Trade with id ${id} not found` });
     res.redirect('/trades');
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -65,7 +65,7 @@ exports.megaEvolution = async (req, res) => {
     const trades = await model.find({ Set: 'megaEvolution' });
     res.render('trades/megaEvolution', { categories, subCategories, trades });
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -76,7 +76,7 @@ exports.MEcards = async (req, res) => {
     const trades = await model.find({ subSet: 'megaEvolutions' });
     res.render('trades/subSets/megaEvolutions', { categories, subCategories, trades });
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -87,7 +87,7 @@ exports.PFcards = async (req, res) => {
     const trades = await model.find({ subSet: 'phantasmalFlames' });
     res.render('trades/subSets/phantasmalFlames', { categories, subCategories, trades });
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -98,7 +98,7 @@ exports.scarletViolet = async (req, res) => {
     const trades = await model.find({ Set: 'scarletViolet' });
     res.render('trades/scarletViolet', { categories, subCategories, trades });
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -109,7 +109,7 @@ exports.BBcards = async (req, res) => {
     const trades = await model.find({ subSet: 'blackBolt' });
     res.render('trades/subSets/blackBolt', { categories, subCategories, trades });
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
 
@@ -120,6 +120,6 @@ exports.WFcards = async (req, res) => {
     const trades = await model.find({ subSet: 'whiteFlare' });
     res.render('trades/subSets/whiteFlare', { categories, subCategories, trades });
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
