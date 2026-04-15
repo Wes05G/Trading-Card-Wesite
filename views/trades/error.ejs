@@ -1,11 +1,61 @@
 <%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
 
+<%
+const code = status || 500;
+
+const errorInfo = {
+    400: { title: 'Bad Request',                  desc: 'The server could not understand your request. Please check your input and try again.' },
+    401: { title: 'Unauthorized',                 desc: 'You must be logged in to access this page.' },
+    403: { title: 'Forbidden',                    desc: 'You do not have permission to access this resource.' },
+    404: { title: 'Page Not Found',               desc: 'The page you are looking for does not exist or has been moved.' },
+    405: { title: 'Method Not Allowed',           desc: 'The request method is not supported for this resource.' },
+    408: { title: 'Request Timeout',              desc: 'The server timed out waiting for your request. Please try again.' },
+    409: { title: 'Conflict',                     desc: 'Your request could not be completed due to a conflict with the current state of the resource.' },
+    410: { title: 'Gone',                         desc: 'The resource you requested has been permanently removed.' },
+    413: { title: 'Payload Too Large',            desc: 'Your request is larger than the server is able to process.' },
+    422: { title: 'Unprocessable Content',        desc: 'The server understood your request but was unable to process it. Please check your input.' },
+    429: { title: 'Too Many Requests',            desc: 'You have sent too many requests in a short period. Please slow down and try again later.' },
+    500: { title: 'Internal Server Error',        desc: 'Something went wrong on our end. Please try again later.' },
+    501: { title: 'Not Implemented',              desc: 'This feature is not yet supported by the server.' },
+    502: { title: 'Bad Gateway',                  desc: 'The server received an invalid response from an upstream server.' },
+    503: { title: 'Service Unavailable',          desc: 'The server is temporarily unable to handle your request. Please try again later.' },
+    504: { title: 'Gateway Timeout',              desc: 'The server did not receive a timely response from an upstream server.' },
+};
+
+const info = errorInfo[code] || { title: 'Unexpected Error', desc: 'An unexpected error occurred. Please try again.' };
+const displayMessage = message || info.desc;
+
+let errorClass = 'error-5xx';
+if (code >= 400 && code < 500) errorClass = 'error-4xx';
+%>
+
 <main>
     <div class="error-container">
-        <h1 class="error-status"><%= status %></h1>
-        <p class="error-message"><%= message %></p>
-        <a href="/" class="btn-primary">Go Home</a>
+        <h1 class="error-status <%= errorClass %>"><%= code %></h1>
+        <p class="error-title"><%= info.title %></p>
+        <p class="error-message"><%= displayMessage %></p>
+
+        <% if (code === 401) { %>
+            <div class="error-actions">
+                <a href="/login" class="button">Log In</a>
+                <a href="/" class="button">Go Home</a>
+            </div>
+        <% } else if (code === 403) { %>
+            <div class="error-actions">
+                <a href="javascript:history.back()" class="button">Go Back</a>
+                <a href="/" class="button">Go Home</a>
+            </div>
+        <% } else if (code === 429) { %>
+            <div class="error-actions">
+                <a href="/" class="button">Go Home</a>
+            </div>
+        <% } else { %>
+            <div class="error-actions">
+                <a href="javascript:history.back()" class="button">Go Back</a>
+                <a href="/" class="button">Go Home</a>
+            </div>
+        <% } %>
     </div>
 </main>
 
