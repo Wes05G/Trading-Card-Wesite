@@ -1,35 +1,34 @@
 <%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
 
-<main class="card-container">
-
-  <div class="card-info">
+<main>
+  <div class="form-wrapper">
     <h2>Start New Trade</h2>
 
-    <form action="/trades/add" method="POST" class="edit-form">
+    <form action="/trades/add" method="POST">
 
-      <div class="form-row">
-        <label for="cardName"><strong>Card Name:</strong></label>
+      <div class="form-group">
+        <label for="cardName">Card Name:</label>
         <input type="text" id="cardName" name="cardName" required>
       </div>
 
-      <div class="form-row">
-        <label for="owner"><strong>Owner:</strong></label>
+      <div class="form-group">
+        <label for="owner">Owner:</label>
         <input type="text" id="owner" name="owner" required>
       </div>
 
-      <div class="form-row">
-        <label for="cardGrade"><strong>PSA Grade:</strong></label>
+      <div class="form-group">
+        <label for="cardGrade">PSA Grade:</label>
         <input type="text" id="cardGrade" name="cardGrade" required>
       </div>
 
-      <div class="form-row">
-        <label for="price"><strong>Price:</strong></label>
+      <div class="form-group">
+        <label for="price">Price:</label>
         <input type="text" id="price" name="price" placeholder="$0.00" required>
       </div>
 
-      <div class="form-row">
-        <label for="status"><strong>Status:</strong></label>
+      <div class="form-group">
+        <label for="status">Status:</label>
         <select id="status" name="status">
           <option value="open">Open</option>
           <option value="pending">Pending</option>
@@ -37,16 +36,16 @@
         </select>
       </div>
 
-      <div class="form-row">
-        <label for="Set"><strong>Set:</strong></label>
+      <div class="form-group">
+        <label for="Set">Set:</label>
         <select id="Set" name="Set">
           <option value="megaEvolution">Mega Evolution</option>
           <option value="scarletViolet">Scarlet & Violet</option>
         </select>
       </div>
 
-      <div class="form-row">
-        <label for="subSet"><strong>Sub Set:</strong></label>
+      <div class="form-group">
+        <label for="subSet">Sub Set:</label>
         <select id="subSet" name="subSet">
           <option value="megaEvolutions">Mega Evolutions</option>
           <option value="phantasmalFlames">Phantasmal Flames</option>
@@ -55,24 +54,18 @@
         </select>
       </div>
 
-      <div class="form-row">
-        <label for="image"><strong>Image Filename:</strong></label>
+      <div class="form-group">
+        <label for="image">Image Filename:</label>
         <input type="text" id="image" name="image" placeholder="example.jpg" required>
       </div>
 
       <div class="form-actions">
+        <button class="button" type="button" onclick="window.history.back();">← Back</button>
         <button class="button" type="submit">Create Trade</button>
       </div>
 
     </form>
-
-    <button class="back-button" onclick="window.history.back();">← Back</button>
   </div>
-
-  <div>
-    <p><em>Image preview will appear after saving.</em></p>
-  </div>
-
 </main>
 
 <%- include('../partials/footer') %>
