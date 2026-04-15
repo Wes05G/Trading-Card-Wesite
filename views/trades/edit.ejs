@@ -1,35 +1,34 @@
 <%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
 
-<main class="card-container">
-
-  <div class="card-info">
+<main>
+  <div class="form-wrapper">
     <h2>Edit Card</h2>
 
-    <form action="/trades/edit/<%= trade.id %>" method="POST" class="edit-form">
+    <form action="/trades/edit/<%= trade.id %>" method="POST">
 
-      <div class="form-row">
-        <label for="cardName"><strong>Card Name:</strong></label>
+      <div class="form-group">
+        <label for="cardName">Card Name:</label>
         <input type="text" id="cardName" name="cardName" value="<%= trade.cardName %>" required>
       </div>
 
-      <div class="form-row">
-        <label for="owner"><strong>Owner:</strong></label>
+      <div class="form-group">
+        <label for="owner">Owner:</label>
         <input type="text" id="owner" name="owner" value="<%= trade.owner %>" required>
       </div>
 
-      <div class="form-row">
-        <label for="cardGrade"><strong>PSA Grade:</strong></label>
+      <div class="form-group">
+        <label for="cardGrade">PSA Grade:</label>
         <input type="text" id="cardGrade" name="cardGrade" value="<%= trade.cardGrade %>" required>
       </div>
 
-      <div class="form-row">
-        <label for="price"><strong>Price:</strong></label>
+      <div class="form-group">
+        <label for="price">Price:</label>
         <input type="text" id="price" name="price" value="<%= trade.price %>" required>
       </div>
 
-      <div class="form-row">
-        <label for="status"><strong>Status:</strong></label>
+      <div class="form-group">
+        <label for="status">Status:</label>
         <select id="status" name="status">
           <option value="open" <%= trade.status === 'open' ? 'selected' : '' %>>Open</option>
           <option value="pending" <%= trade.status === 'pending' ? 'selected' : '' %>>Pending</option>
@@ -37,22 +36,16 @@
         </select>
       </div>
 
+      <% if (trade && trade.image) { %>
+        <img src="/Images/<%= trade.image %>" alt="<%= trade.cardName %>" width="200" style="margin-bottom: 12px;">
+      <% } %>
+
       <div class="form-actions">
+        <button class="button" type="button" onclick="window.history.back();">← Back</button>
         <button class="button" type="submit">Save Changes</button>
       </div>
     </form>
-
-    <button class="back-button" onclick="window.history.back();">← Back</button>
   </div>
-
-  <div>
-    <% if (trade && trade.image) { %>
-      <img src="/Images/<%= trade.image %>" alt="<%= trade.cardName %>" width="260">
-    <% } else { %>
-      <p><em>No image on file for this card.</em></p>
-    <% } %>
-  </div>
-
 </main>
 
 <%- include('../partials/footer') %>
