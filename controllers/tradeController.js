@@ -1,5 +1,20 @@
 const model = require('../models/trade');
 
+exports.index = async (req, res) => {
+  try {
+    const allTrades = await model.find({});
+    const grouped = {};
+    for (const trade of allTrades) {
+      if (!grouped[trade.Set]) grouped[trade.Set] = {};
+      if (!grouped[trade.Set][trade.subSet]) grouped[trade.Set][trade.subSet] = [];
+      grouped[trade.Set][trade.subSet].push(trade);
+    }
+    res.render('trades/trades', { grouped });
+  } catch (err) {
+    res.status(500).render('trades/error', { status: 500, message: err.message });
+  }
+};
+
 exports.details = async (req, res) => {
   try {
     const id = String(req.params.id);

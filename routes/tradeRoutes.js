@@ -3,6 +3,8 @@ const controller = require('../controllers/tradeController');
 
 const router = express.Router();
 
+router.get('/', controller.index);
+
 router.get('/new', controller.new);
 router.post('/add', controller.add);
 

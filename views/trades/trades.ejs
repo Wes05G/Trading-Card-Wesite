@@ -4,16 +4,24 @@
 
 <main>
     <div class="set-page">
-        <h3>Pokemon</h3>
-        <ul class="set-list">
-            <li class="b">
-                <a href="/trades/megaEvolution" class="button">Mega Evolution</a>
-            </li>
-            <li class="b">
-                <a href="/trades/scarletViolet" class="button">Scarlet & Violet</a>
-            </li>
-        </ul>
-        <button class="button" onclick="window.history.back();">← Back</button>
+        <h2>Pokemon</h2>
+        <% if (Object.keys(grouped).length === 0) { %>
+            <p>No cards are currently listed.</p>
+        <% } %>
+        <% Object.entries(grouped).forEach(([set, subSets]) => { %>
+            <h3 class="set-heading"><%= set %></h3>
+            <% Object.entries(subSets).forEach(([subSet, trades]) => { %>
+                <h4 class="subset-heading"><%= subSet %></h4>
+                <div class="card-grid">
+                    <% trades.forEach(t => { %>
+                        <a href="/trades/<%= t.id %>" class="card-thumb">
+                            <img src="/Images/<%= t.image %>" alt="<%= t.cardName %>" width="110" height="150">
+                            <p class="card-thumb-name"><%= t.cardName %></p>
+                        </a>
+                    <% }) %>
+                </div>
+            <% }) %>
+        <% }) %>
     </div>
 </main>
 
