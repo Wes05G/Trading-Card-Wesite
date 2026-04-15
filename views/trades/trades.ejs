@@ -3,17 +3,18 @@
 <%- include('../partials/navbar') %>
 
 <main>
-    <h3>Pokemon</h3>
-    <ul class="set-list">
-        <li class="b">
-            <a href="/trades/megaEvolution" class="button">Mega Evolution</a>
-        </li>
-        <li class="b">
-            <a href="/trades/scarletViolet" class="button">Scarlet & Violet</a>
-        </li>
-    </ul>
-
-    <button class="back-button" onclick="window.history.back();">← Back</button>
+    <div class="set-page">
+        <h3>Pokemon</h3>
+        <ul class="set-list">
+            <li class="b">
+                <a href="/trades/megaEvolution" class="button">Mega Evolution</a>
+            </li>
+            <li class="b">
+                <a href="/trades/scarletViolet" class="button">Scarlet & Violet</a>
+            </li>
+        </ul>
+        <button class="button" onclick="window.history.back();">← Back</button>
+    </div>
 </main>
 
 <%- include('../partials/footer') %>

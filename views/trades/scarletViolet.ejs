@@ -3,18 +3,18 @@
 <%- include('../partials/navbar') %>
 
 <main>
-    <h3>Choose your set:</h3>
-
-    <ul class="set-list">
-        <li class="b">
-            <a href="/trades/whiteFlare" class="button">White Flare</a>
-        </li>
-        <li class="b">
-            <a href="/trades/blackBolt" class="button">Black Bolt</a>
-        </li>
-    </ul>
-
-    <button class="back-button" onclick="window.history.back();">← Back</button>
+    <div class="set-page">
+        <h3>Choose your set:</h3>
+        <ul class="set-list">
+            <li class="b">
+                <a href="/trades/whiteFlare" class="button">White Flare</a>
+            </li>
+            <li class="b">
+                <a href="/trades/blackBolt" class="button">Black Bolt</a>
+            </li>
+        </ul>
+        <button class="button" onclick="window.history.back();">← Back</button>
+    </div>
 </main>
 
 <%- include('../partials/footer') %>
