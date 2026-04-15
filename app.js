@@ -43,6 +43,18 @@ app.use('/trades', tradeRoutes);
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
 
+// 404 — no route matched
+app.use((req, res) => {
+    res.status(404).render('trades/error', { status: 404, message: 'The page you are looking for does not exist.' });
+});
+
+// 500 — unhandled error bubbled up from a route or middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    const code = err.status || err.statusCode || 500;
+    res.status(code).render('trades/error', { status: code, message: err.message || 'An unexpected error occurred.' });
+});
+
 
 
 /*
