@@ -1,12 +1,12 @@
 const express = require('express');
+const flash = require('express-flash');
+const session = require('express-session');
+const { MongoStore } = require('connect-mongo');
 const path = require('path');
 const mongoose = require('mongoose');
 
 const app = express();
 const PORT = 3000;
-
-const session = require('express-session');
-const { MongoStore } = require('connect-mongo');
 
 const tradeRoutes = require('./routes/tradeRoutes');
 const mainRoutes = require('./routes/mainRoutes');
@@ -42,6 +42,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/trades', tradeRoutes);
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
+app.use(flash());
 
 // 404 — no route matched
 app.use((req, res) => {
