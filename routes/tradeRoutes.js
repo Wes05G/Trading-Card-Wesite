@@ -1,12 +1,13 @@
 const express = require('express');
 const controller = require('../controllers/tradeController');
+const { isLoggedIn } = require('../middleWare/auth');
 
 const router = express.Router();
 
 router.get('/', controller.index);
 
-router.get('/new', controller.new);
-router.post('/add', controller.add);
+router.get('/new', isLoggedIn, controller.new);
+router.post('/add', isLoggedIn, controller.add);
 
 router.get('/megaEvolution', controller.megaEvolution);
 router.get('/megaEvolutions', controller.MEcards);
