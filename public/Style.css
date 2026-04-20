@@ -395,3 +395,14 @@ li.b{
     text-align: center;
     max-width: 110px;
 }
+.error-text {
+    color: #c0392b;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.success-text {
+    color: #27ae60;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

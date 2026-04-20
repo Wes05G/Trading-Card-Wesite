@@ -1,6 +1,7 @@
 const express = require('express');
 const controller = require('../controllers/tradeController');
 const { isLoggedIn } = require('../middleWare/auth');
+const {isAuthor} = require('../middleWare/auth');
 
 const router = express.Router();
 
@@ -17,9 +18,9 @@ router.get('/scarletViolet', controller.scarletViolet);
 router.get('/blackBolt', controller.BBcards);
 router.get('/whiteFlare', controller.WFcards);
 
-router.get('/:id/edit', controller.edit);
+router.get('/:id/edit', isLoggedIn, isAuthor, controller.edit);
 router.get('/:id', controller.details);
-router.post('/edit/:id', controller.update);
-router.post('/delete/:id', controller.delete);
+router.post('/edit/:id', isLoggedIn, isAuthor, controller.update);
+router.post('/delete/:id', isLoggedIn, isAuthor, controller.delete);
 
 module.exports = router;

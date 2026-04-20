@@ -1,0 +1,14 @@
+<%- include('../../partials/header') %>
+<%- include('../../partials/navbar') %>
+
+<main>
+    <div class="form-wrapper">
+        <% if (messages && messages.success && messages.success.length) { %>
+            <p class="success-text"><%= messages.success[0] %></p>
+        <% } %>
+        <h1>Welcome, <%= name %>!</h1>
+        <a href="/users/logout" class="button">Logout</a>
+    </div>
+</main>
+
+<%- include('../../partials/footer') %>

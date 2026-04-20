@@ -38,11 +38,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(flash());
+
 //Calling the routes
 app.use('/trades', tradeRoutes);
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
-app.use(flash());
 
 // 404 — no route matched
 app.use((req, res) => {

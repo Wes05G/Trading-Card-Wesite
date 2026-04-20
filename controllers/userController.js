@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 exports.showLogin = (req, res) => {
-    res.render('trades/users/login');
+    const success = req.query.loggedout ? 'Logged out successfully!' : null;
+    res.render('trades/users/login', { success });
 };
 
 exports.login = async (req, res) => {
@@ -16,6 +17,7 @@ exports.login = async (req, res) => {
         if (match) {
             req.session.userId = user._id;
             req.session.userName = user.name;
+            req.flash('success', 'Logged in successfully!');
             res.redirect('/users/profile');
         } else {
             res.render('trades/users/login', { error: 'Incorrect credentials' });
@@ -45,7 +47,7 @@ exports.signup = async (req, res) => {
 
 exports.logout = (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/users/login');
+        res.redirect('/users/login?loggedout=true');
     });
 };
 
