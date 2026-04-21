@@ -4,10 +4,6 @@
         <% if (locals.currentUser) { %>
             <li><a href="/trades/new">Start Trade!</a></li>
             <li><a href="/users/profile">Profile</a></li>
-            <li><a href="/users/logout">Logout</a></li>
-        <% } else { %>
-            <li><a href="/users/signup">Sign Up</a></li>
-            <li><a href="/users/login">Login</a></li>
         <% } %>
     </ul>
     <% if (locals.currentUser) { %>

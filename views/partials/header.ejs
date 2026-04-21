@@ -18,9 +18,14 @@
     </div>
 
     <div class="header-right">
-        <button class="button login-button" onclick="location.href='/users/login'">
-            Login
-        </button>
-        
+        <% if (locals.currentUser) { %>
+            <button class="button login-button" onclick="location.href='/users/logout'">
+                Logout
+            </button>
+        <% } else { %>
+            <button class="button login-button" onclick="location.href='/users/login'">
+                Login
+            </button>
+        <% } %>
     </div>
 </header>
