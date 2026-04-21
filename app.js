@@ -40,6 +40,13 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(flash());
 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.session.userId
+        ? { id: String(req.session.userId), name: req.session.userName }
+        : null;
+    next();
+});
+
 //Calling the routes
 app.use('/trades', tradeRoutes);
 app.use('/', mainRoutes);

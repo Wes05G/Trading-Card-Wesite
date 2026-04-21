@@ -40,6 +40,16 @@ main {
 .navbar {
     background-color: #3d3522;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-welcome {
+    color: #b8e0d4;
+    padding: 0 20px;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .navbar a {

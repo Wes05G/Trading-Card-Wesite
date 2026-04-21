@@ -15,10 +15,12 @@
 
       <div class="form-actions">
         <button class="button" onclick="window.history.back();">← Back</button>
-        <a class="button" href="/trades/<%= trade.id %>/edit">Edit</a>
-        <form action="/trades/delete/<%= trade.id %>" method="POST" style="display:inline;">
-          <button class="button" type="submit" onclick="return confirm('Delete this card?');">Delete</button>
-        </form>
+        <% if (locals.currentUser && currentUser.id === trade.userId) { %>
+          <a class="button" href="/trades/<%= trade.id %>/edit">Edit</a>
+          <form action="/trades/delete/<%= trade.id %>" method="POST" style="display:inline;">
+            <button class="button" type="submit" onclick="return confirm('Delete this card?');">Delete</button>
+          </form>
+        <% } %>
       </div>
     </div>
 

@@ -33,7 +33,14 @@ exports.new = (req, res) => {
 
 exports.add = async (req, res) => {
   try {
-    await model.create(req.body);
+    const lastTrade = await model.findOne({}).sort({ id: -1 });
+    const nextId = lastTrade ? String(Number(lastTrade.id) + 1) : '1';
+    await model.create({
+      ...req.body,
+      id: nextId,
+      owner: req.session.userName,
+      userId: String(req.session.userId),
+    });
     res.redirect('/trades');
   } catch (err) {
     res.status(500).render('trades/error', { status: 500, message: err.message });

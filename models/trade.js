@@ -8,6 +8,7 @@ const tradeSchema = new Schema({
     id: { type: String, required: true, unique: true },
     cardName: { type: String, required: true },
     owner: { type: String, required: true },
+    userId: { type: String, required: true },
     cardGrade: { type: String, required: true },
     status: { type: String, required: true },
     image: { type: String, required: true },

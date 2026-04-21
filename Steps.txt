@@ -26,3 +26,16 @@
 *5. isAuthor - checks to see is the id in the session is the orginal author id to allow edit, delete, and update
 
 6. (req.session.user = user_id;) Grabs the users id from the back-end and populates it in the front-end
+
+----------------------------------------------------------------------------------------------------------------
+api for project phase 5:
+Sending trades
+1. Swap isAuthor
+2. Reject trade
+3. Cancel trade
+Watchlist
+1. Add to a Watchlist
+2. Delete from a Watchlist
+Security
+1. Add additional vladiation for inputs
+2. Additional validation for encryptions
