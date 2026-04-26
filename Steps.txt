@@ -36,6 +36,16 @@ Sending trades
 Watchlist
 1. Add to a Watchlist
 2. Delete from a Watchlist
+3. Suppsed to be in profile.ejs
 Security
 1. Add additional vladiation for inputs
 2. Additional validation for encryptions
+Offer
+1. Offers
+    a. Offer Collection
+2. 
+3. Manage Offers
+4. Cancel
+5. Accept
+6. Reject
+7. Suppsed to be in profile.ejs
