@@ -63,7 +63,8 @@ exports.profile = async (req, res) => {
         const wishlist = await Wishlist.findOne({ userId });
         const wishItems = wishlist ? wishlist.cards : [];
         const wishlistCards = wishItems.length ? await Trade.find({ id: { $in: wishItems } }) : [];
-        res.render('trades/users/profile', { user, wishlistCards });
+        const myCards = await Trade.find({ userId });
+        res.render('trades/users/profile', { user, wishlistCards, myCards });
     } catch (err) {
         res.status(500).render('trades/error', { status: 500, message: err.message });
     }

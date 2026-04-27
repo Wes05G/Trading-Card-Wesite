@@ -5,29 +5,48 @@
     <h1><%= user.name %>'s Profile</h1>
 
     <div class="profile-info">
-      <p><strong>User:</strong> <%= user.name %></p>  
+      <p><strong>User:</strong> <%= user.name %></p>
     </div>
-    <div class="wishlist-container">
-  
-        <h1>My Wishlist</h1>
-  <% if (wishlistCards && wishlistCards.length) { %>
-    <div class="card-grid">
-      <% wishlistCards.forEach(function(card) { %>
-        <div class="card-item" style="display:flex;flex-direction:column;align-items:center;">
-          <a href="/trades/<%= card.id %>" class="card-thumb">
-            <img src="/Images/<%= card.image %>" alt="<%= card.cardName %>" width="110" height="150">
-            <p class="card-thumb-name"><%= card.cardName %></p>
-          </a>
-          <form action="/trades/wishlist/remove/<%= card.id %>" method="POST">
-            <button type="submit" onclick="return confirm('Remove from wishlist?');">Remove</button>
-          </form>
+
+    <div class="mycards-container">
+      <h2>My Cards</h2>
+      <% if (myCards && myCards.length) { %>
+        <div class="card-grid">
+          <% myCards.forEach(function(card) { %>
+            <div class="card-item" style="display:flex;flex-direction:column;align-items:center;">
+              <a href="/trades/<%= card.id %>" class="card-thumb">
+                <img src="/Images/<%= card.image %>" alt="<%= card.cardName %>" width="110" height="150">
+              </a>
+              <p class="card-thumb-name"><%= card.cardName %></p>
+            </div>
+          <% }) %>
         </div>
-      <% }) %>
+      <% } else { %>
+        <p class="empty-message">You don't own any cards yet.</p>
+      <% } %>
     </div>
-  <% } else { %>
-    <p class="empty-message">Your wishlist is empty. Browse cards to add some!</p>
-  <% } %>
-</div>
+
+    <div class="wishlist-container">
+      <h2>My Wishlist</h2>
+      <% if (wishlistCards && wishlistCards.length) { %>
+        <div class="card-grid">
+          <% wishlistCards.forEach(function(card) { %>
+            <div class="card-item" style="display:flex;flex-direction:column;align-items:center;">
+              <a href="/trades/<%= card.id %>" class="card-thumb">
+                <img src="/Images/<%= card.image %>" alt="<%= card.cardName %>" width="110" height="150">
+              </a>
+              <p class="card-thumb-name"><%= card.cardName %></p>
+              <form action="/trades/wishlist/remove/<%= card.id %>" method="POST">
+                <button type="submit" onclick="return confirm('Remove from wishlist?');">Remove</button>
+              </form>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="empty-message">Your wishlist is empty. Browse cards to add some!</p>
+      <% } %>
+    </div>
+  </div>
 </main>
 
 <%- include('../../partials/footer') %>
