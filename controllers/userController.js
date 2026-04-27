@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const Wishlist = require('../models/wishlists');
+const Trade = require('../models/trade');
 
 exports.showLogin = (req, res) => {
     const success = req.query.loggedout ? 'Logged out successfully!' : null;
@@ -51,9 +53,18 @@ exports.logout = (req, res) => {
     });
 };
 
-exports.profile = (req, res) => {
+exports.profile = async (req, res) => {
     if (!req.session.userId) {
         return res.redirect('/users/login');
     }
-    res.render('trades/users/profile', { name: req.session.userName });
+    try {
+        const userId = String(req.session.userId);
+        const user = await User.findById(req.session.userId);
+        const wishlist = await Wishlist.findOne({ userId });
+        const wishItems = wishlist ? wishlist.cards : [];
+        const wishlistCards = wishItems.length ? await Trade.find({ id: { $in: wishItems } }) : [];
+        res.render('trades/users/profile', { user, wishlistCards });
+    } catch (err) {
+        res.status(500).render('trades/error', { status: 500, message: err.message });
+    }
 };

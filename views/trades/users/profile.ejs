@@ -1,14 +1,33 @@
 <%- include('../../partials/header') %>
 <%- include('../../partials/navbar') %>
-
 <main>
-    <div class="form-wrapper">
-        <% if (messages && messages.success && messages.success.length) { %>
-            <p class="success-text"><%= messages.success[0] %></p>
-        <% } %>
-        <h1>Welcome, <%= name %>!</h1>
-        <a href="/users/logout" class="button">Logout</a>
+  <div class="profile-container">
+    <h1><%= user.name %>'s Profile</h1>
+
+    <div class="profile-info">
+      <p><strong>User:</strong> <%= user.name %></p>  
     </div>
+    <div class="wishlist-container">
+  
+        <h1>My Wishlist</h1>
+  <% if (wishlistCards && wishlistCards.length) { %>
+    <div class="card-grid">
+      <% wishlistCards.forEach(function(card) { %>
+        <div class="card-item" style="display:flex;flex-direction:column;align-items:center;">
+          <a href="/trades/<%= card.id %>" class="card-thumb">
+            <img src="/Images/<%= card.image %>" alt="<%= card.cardName %>" width="110" height="150">
+            <p class="card-thumb-name"><%= card.cardName %></p>
+          </a>
+          <form action="/trades/wishlist/remove/<%= card.id %>" method="POST">
+            <button type="submit" onclick="return confirm('Remove from wishlist?');">Remove</button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p class="empty-message">Your wishlist is empty. Browse cards to add some!</p>
+  <% } %>
+</div>
 </main>
 
 <%- include('../../partials/footer') %>

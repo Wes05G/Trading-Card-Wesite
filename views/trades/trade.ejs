@@ -18,6 +18,18 @@
         <% if (locals.currentUser && currentUser.id !== trade.userId) { %>
           <a class="button" href="/trades/<%= trade.id %>/offers">Trade</a>
         <% } %>
+        
+        <% if (locals.currentUser && currentUser.id !== trade.userId) { %>
+        <% if (isWishlisted) { %>
+          <form action="/trades/wishlist/remove/<%= trade.id %>" method="POST" style="display:inline;">
+            <button class="button" type="submit">Remove from Wishlist</button>
+              </form>
+      <% } else { %>
+        <form action="/trades/wishlist/add/<%= trade.id %>" method="POST" style="display:inline;">
+          <button class="button" type="submit">Add to Wishlist</button>
+          </form>
+  <% } %>
+<% } %>
         <% if (locals.currentUser && currentUser.id === trade.userId) { %>
           <a class="button" href="/trades/<%= trade.id %>/edit">Edit</a>
           <form action="/trades/delete/<%= trade.id %>" method="POST" style="display:inline;">

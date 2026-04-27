@@ -1,4 +1,5 @@
 const model = require('../models/trade');
+const Wishlist = require('../models/wishlists');
 
 exports.index = async (req, res) => {
   try {
@@ -20,7 +21,12 @@ exports.details = async (req, res) => {
     const id = String(req.params.id);
     const trade = await model.findOne({ id: id });
     if (!trade) return res.status(404).render('trades/error', { status: 404, message: `Trade with id ${id} not found` });
-    res.render('trades/trade', { trade });
+    let isWishlisted = false;
+    if (req.session.userId) {
+      const wishlist = await Wishlist.findOne({ userId: String(req.session.userId) });
+      isWishlisted = !!(wishlist && wishlist.cards.includes(id));
+    }
+    res.render('trades/trade', { trade, isWishlisted });
   } catch (err) {
     console.error("DETAILS ERROR:", err.message);
     res.status(500).render('trades/error', { status: 500, message: err.message });
@@ -92,26 +98,27 @@ exports.offers = async (req, res) => {
   }
 };
 
-exports.wishlist = async (req, res) => {
-  try {
-    const userId = String(req.session.userId);
-    const wishListTrades = await model.find({ wishList: userId });
-    res.render('trades/wishList', { trades: wishListTrades });
-  } catch (err) {
-    res.status(500).render('trades/error', { status: 500, message: err.message });
-  }
-};
-
 exports.addToWishlist = async (req, res) => {
-  try {    
+  try {
     const tradeId = String(req.params.id);
     const userId = String(req.session.userId);
-    await model.findOneAndUpdate({ id: tradeId }, { $addToSet: { wishList: userId } });
+    await Wishlist.findOneAndUpdate({ userId }, { $addToSet: { cards: tradeId } }, { upsert: true });
     res.redirect(`/trades/${tradeId}`);
   } catch (err) {
     res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 }
+
+exports.removeFromWishlist = async (req, res) => {
+  try {
+    const tradeId = String(req.params.id);
+    const userId = String(req.session.userId);
+    await Wishlist.findOneAndUpdate({ userId }, { $pull: { cards: tradeId } });
+    res.redirect('/users/profile');
+  } catch (err) {
+    res.status(500).render('trades/error', { status: 500, message: err.message });
+  }
+};
 
 exports.megaEvolution = async (req, res) => {
   try {

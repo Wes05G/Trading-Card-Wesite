@@ -15,6 +15,7 @@ const tradeSchema = new Schema({
     price: { type: String, required: true },
     Set: { type: String, required: true },
     subSet: { type: String, required: true },
+    wishlist: { type: [String], default: [] },
     }, { id: false });
 
 module.exports = mongoose.model('Card', tradeSchema, 'Card');
