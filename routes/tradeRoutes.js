@@ -24,8 +24,8 @@ router.get('/:id', controller.details);
 router.post('/edit/:id', isLoggedIn, isAuthor, controller.update);
 router.post('/delete/:id', isLoggedIn, isAuthor, controller.delete);
 
-router.get('/wishList', isLoggedIn, controller.wishList);
-router.post('/wishList/add/:id', isLoggedIn, controller.addToWishList);
-router.post('/wishList/remove/:id', isLoggedIn, controller.delete);
+router.get('/wishlist', isLoggedIn, controller.wishList);
+router.post('/wishlist/add/:id', isLoggedIn, controller.addToWishList);
+router.post('/wishlist/remove/:id', isLoggedIn, controller.delete);
 
 module.exports = router;

@@ -92,7 +92,7 @@ exports.offers = async (req, res) => {
   }
 };
 
-exports.wishList = async (req, res) => {
+exports.wishlist = async (req, res) => {
   try {
     const userId = String(req.session.userId);
     const wishListTrades = await model.find({ wishList: userId });
@@ -102,7 +102,7 @@ exports.wishList = async (req, res) => {
   }
 };
 
-exports.addToWishList = async (req, res) => {
+exports.addToWishlist = async (req, res) => {
   try {    
     const tradeId = String(req.params.id);
     const userId = String(req.session.userId);
