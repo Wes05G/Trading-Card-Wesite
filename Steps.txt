@@ -33,6 +33,8 @@ Sending trades
 1. Swap isAuthor
 2. Reject trade
 3. Cancel trade
+
+    Should All Be In Profile
 Watchlist
 1. Add to a Watchlist
 2. Delete from a Watchlist
