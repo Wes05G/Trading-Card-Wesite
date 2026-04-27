@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+  <div class="set-page">
+    <h2>Make an Offer</h2>
+
+    <div class="trade-detail-wrapper">
+      <div class="trade-detail-info">
+        <h3>They want to trade:</h3>
+        <h4><%= trade.cardName %></h4>
+        <p><strong>Owner:</strong> <%= trade.owner %></p>
+        <p><strong>PSA Grade:</strong> <%= trade.cardGrade %></p>
+        <p><strong>Price:</strong> <%= trade.price %></p>
+        <p><strong>Set:</strong> <%= trade.Set %> / <%= trade.subSet %></p>
+      </div>
+      <div class="trade-detail-image">
+        <% if (trade.image) { %>
+          <img src="/Images/<%= trade.image %>" alt="<%= trade.cardName %>" width="260">
+        <% } %>
+      </div>
+    </div>
+
+    <hr>
+
+    <h3>Select a card to offer:</h3>
+
+    <% if (myCards.length === 0) { %>
+      <p>You have no cards listed. <a href="/trades/new">Add a card</a> to make an offer.</p>
+    <% } else { %>
+      <form action="/trades/<%= trade.id %>/offers" method="POST">
+        <div class="card-grid">
+          <% myCards.forEach(card => { %>
+            <label class="card-thumb offer-card">
+              <input type="radio" name="offeredCardId" value="<%= card.id %>" required>
+              <img src="/Images/<%= card.image %>" alt="<%= card.cardName %>" width="110" height="150">
+              <p class="card-thumb-name"><%= card.cardName %></p>
+              <p class="card-thumb-name">Grade: <%= card.cardGrade %></p>
+            </label>
+          <% }) %>
+        </div>
+        <div class="form-actions" style="margin-top: 1.5rem;">
+          <button class="button" onclick="window.history.back();" type="button">← Back</button>
+          <button class="button" type="submit">Send Offer</button>
+        </div>
+      </form>
+    <% } %>
+  </div>
+</main>
+
+<%- include('../partials/footer') %>

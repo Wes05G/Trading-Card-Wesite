@@ -18,6 +18,7 @@ router.get('/scarletViolet', controller.scarletViolet);
 router.get('/blackBolt', controller.BBcards);
 router.get('/whiteFlare', controller.WFcards);
 
+router.get('/:id/offers', isLoggedIn, controller.offers);
 router.get('/:id/edit', isLoggedIn, isAuthor, controller.edit);
 router.get('/:id', controller.details);
 router.post('/edit/:id', isLoggedIn, isAuthor, controller.update);

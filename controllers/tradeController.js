@@ -80,6 +80,18 @@ exports.delete = async (req, res) => {
   }
 };
 
+exports.offers = async (req, res) => {
+  try {
+    const id = String(req.params.id);
+    const trade = await model.findOne({ id: id });
+    if (!trade) return res.status(404).render('trades/error', { status: 404, message: `Trade with id ${id} not found` });
+    const myCards = await model.find({ userId: String(req.session.userId) });
+    res.render('trades/offers', { trade, myCards });
+  } catch (err) {
+    res.status(500).render('trades/error', { status: 500, message: err.message });
+  }
+};
+
 exports.megaEvolution = async (req, res) => {
   try {
     const categories = 'megaEvolution';

@@ -15,6 +15,9 @@
 
       <div class="form-actions">
         <button class="button" onclick="window.history.back();">← Back</button>
+        <% if (locals.currentUser && currentUser.id !== trade.userId) { %>
+          <a class="button" href="/trades/<%= trade.id %>/offers">Trade</a>
+        <% } %>
         <% if (locals.currentUser && currentUser.id === trade.userId) { %>
           <a class="button" href="/trades/<%= trade.id %>/edit">Edit</a>
           <form action="/trades/delete/<%= trade.id %>" method="POST" style="display:inline;">
