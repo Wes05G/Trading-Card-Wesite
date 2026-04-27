@@ -15,6 +15,7 @@
       <ul>
         <% wishItems.forEach(function(item) { %>
           <li><span><%= item %></span></li>
+          <button class="button" type="submit" onclick="return confirm('Delete this from wish list?');">Delete</button>
         <% }) %>
       </ul>
     <% } else { %>

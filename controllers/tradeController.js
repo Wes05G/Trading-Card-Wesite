@@ -92,6 +92,27 @@ exports.offers = async (req, res) => {
   }
 };
 
+exports.wishList = async (req, res) => {
+  try {
+    const userId = String(req.session.userId);
+    const wishListTrades = await model.find({ wishList: userId });
+    res.render('trades/wishList', { trades: wishListTrades });
+  } catch (err) {
+    res.status(500).render('trades/error', { status: 500, message: err.message });
+  }
+};
+
+exports.addToWishList = async (req, res) => {
+  try {    
+    const tradeId = String(req.params.id);
+    const userId = String(req.session.userId);
+    await model.findOneAndUpdate({ id: tradeId }, { $addToSet: { wishList: userId } });
+    res.redirect(`/trades/${tradeId}`);
+  } catch (err) {
+    res.status(500).render('trades/error', { status: 500, message: err.message });
+  }
+}
+
 exports.megaEvolution = async (req, res) => {
   try {
     const categories = 'megaEvolution';
@@ -157,3 +178,4 @@ exports.WFcards = async (req, res) => {
     res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
+
