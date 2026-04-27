@@ -45,7 +45,7 @@ Offer
     a. Offer Collection
 2. 
 3. Manage Offers
-4. Cancel
-5. Accept
-6. Reject
-7. Suppsed to be in profile.ejs
+    a. Cancel
+    b. Accept
+    c. Reject
+7. pending trades in profile.ejs
