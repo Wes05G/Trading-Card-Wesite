@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const Wishlist = require('../models/wishlists');
 const Trade = require('../models/trade');
+const Offer = require('../models/offers');
 
 exports.showLogin = (req, res) => {
     const success = req.query.loggedout ? 'Logged out successfully!' : null;
@@ -64,7 +65,10 @@ exports.profile = async (req, res) => {
         const wishItems = wishlist ? wishlist.cards : [];
         const wishlistCards = wishItems.length ? await Trade.find({ id: { $in: wishItems } }) : [];
         const myCards = await Trade.find({ userId });
-        res.render('trades/users/profile', { user, wishlistCards, myCards });
+        const offerSent = await Offer.find({ userId });
+        const offerReceived = await Offer.find({ offeredUserId: userId });
+        res.render('trades/users/profile', { user, wishlistCards, myCards, 
+            offerSent, offerReceived });
     } catch (err) {
         res.status(500).render('trades/error', { status: 500, message: err.message });
     }

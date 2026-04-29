@@ -1,6 +1,18 @@
 <%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
 
+<% if (locals.offerSent) { %>
+<div id="offer-toast" style="position:fixed;top:1.5rem;left:50%;transform:translateX(-50%);background:#2e7d32;color:#fff;padding:0.75rem 1.5rem;border-radius:8px;font-size:1rem;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+  Trade offer sent!
+</div>
+<script>
+  setTimeout(() => {
+    const t = document.getElementById('offer-toast');
+    if (t) t.style.display = 'none';
+  }, 3000);
+</script>
+<% } %>
+
 <main>
   <div class="trade-detail-wrapper">
 

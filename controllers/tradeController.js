@@ -1,5 +1,7 @@
 const model = require('../models/trade');
 const Wishlist = require('../models/wishlists');
+const Offer = require('../models/offers');
+const User = require('../models/user');
 
 exports.index = async (req, res) => {
   try {
@@ -26,7 +28,7 @@ exports.details = async (req, res) => {
       const wishlist = await Wishlist.findOne({ userId: String(req.session.userId) });
       isWishlisted = !!(wishlist && wishlist.cards.includes(id));
     }
-    res.render('trades/trade', { trade, isWishlisted });
+    res.render('trades/trade', { trade, isWishlisted, offerSent: req.query.offerSent === 'true' });
   } catch (err) {
     console.error("DETAILS ERROR:", err.message);
     res.status(500).render('trades/error', { status: 500, message: err.message });
@@ -97,6 +99,72 @@ exports.offers = async (req, res) => {
     res.status(500).render('trades/error', { status: 500, message: err.message });
   }
 };
+
+exports.submitOffer = async (req, res) => {
+  try {
+    const tradeId = String(req.params.id);
+    const offeredCardId = String(req.body.offeredCardId);
+    const userId = String(req.session.userId);
+    const trade = await model.findOne({ id: tradeId });
+    const offeredCard = await model.findOne({ id: offeredCardId });
+    if (!trade || !offeredCard) {
+      return res.status(404).render('trades/error', { status: 404, message: 'Trade or offered card not found' });
+    }
+    const lastOffer = await Offer.findOne({}).sort({ id: -1 });
+    const nextId = lastOffer ? String(Number(lastOffer.id) + 1) : '1';
+    await Offer.create({
+      id: nextId,
+      tradeId,
+      offeredCardId,
+      userId,
+      offeredUserId: trade.userId,
+      status: 'pending',
+      cardName: trade.cardName,
+      offeredCardName: offeredCard.cardName,
+      image: trade.image,
+      offeredCardImage: offeredCard.image,
+    });
+    res.redirect(`/trades/${tradeId}?offerSent=true`);
+  } catch (err) {
+    res.status(500).render('trades/error', { status: 500, message: err.message });
+  }
+};
+
+exports.acceptOffer = async (req, res) => {
+  try {
+    const offerId = String(req.body.offerId);
+    const offer = await Offer.findOne({ id: offerId });
+    if (!offer) return res.status(404).render('trades/error', { status: 404, message: 'Offer not found' });
+    const offeror = await User.findById(offer.userId);
+    const originalOwner = await User.findById(offer.offeredUserId);
+    await model.findOneAndUpdate({ id: offer.tradeId }, { userId: offer.userId, owner: offeror.name });
+    await model.findOneAndUpdate({ id: offer.offeredCardId }, { userId: offer.offeredUserId, owner: originalOwner.name });
+    await Offer.deleteMany({ $or: [{ tradeId: offer.tradeId }, { tradeId: offer.offeredCardId }] });
+    res.redirect('/users/profile');
+  } catch (err) {
+    res.status(500).render('trades/error', { status: 500, message: err.message });
+  }
+}
+
+exports.rejectOffer = async (req, res) => {
+  try {
+    const offerId = String(req.body.offerId);
+    await Offer.findOneAndDelete({ id: offerId });
+    res.redirect('/users/profile');
+  } catch (err) {
+    res.status(500).render('trades/error', { status: 500, message: err.message });
+  }
+}
+
+exports.cancelOffer = async (req, res) => {
+  try {
+    const offerId = String(req.body.offerId);
+    await Offer.findOneAndDelete({ id: offerId });
+    res.redirect('/users/profile');
+  } catch (err) {
+    res.status(500).render('trades/error', { status: 500, message: err.message });
+  }
+}
 
 exports.addToWishlist = async (req, res) => {
   try {

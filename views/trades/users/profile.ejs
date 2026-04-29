@@ -8,6 +8,80 @@
       <p><strong>User:</strong> <%= user.name %></p>
     </div>
 
+    <div class = "offers-container">
+      <h2>Offers Sent</h2>
+      <% if (offerSent && offerSent.length) { %>
+        <div class="card-grid">
+          <% offerSent.forEach(function(offer) { %>
+            <div class="card-item" style="display:flex;flex-direction:column;align-items:center;">
+              <div style="display:flex;gap:1rem;align-items:center;">
+                <div style="text-align:center;">
+                  <p class="card-thumb-name" style="margin-bottom:6px;">You want</p>
+                  <a href="/trades/<%= offer.tradeId %>" class="card-thumb">
+                    <img src="/Images/<%= offer.image %>" alt="<%= offer.cardName %>" width="110" height="150">
+                  </a>
+                  <p class="card-thumb-name"><%= offer.cardName %></p>
+                </div>
+                <div style="font-size:1.5rem;">⇄</div>
+                <div style="text-align:center;">
+                  <p class="card-thumb-name" style="margin-bottom:6px;">You offered</p>
+                  <div class="card-thumb">
+                    <img src="/Images/<%= offer.offeredCardImage %>" alt="<%= offer.offeredCardName %>" width="110" height="150">
+                  </div>
+                  <p class="card-thumb-name"><%= offer.offeredCardName %></p>
+                </div>
+              </div>
+              <form action="/trades/<%= offer.tradeId %>/offers/cancel" method="POST">
+                <input type="hidden" name="offerId" value="<%= offer.id %>">
+                <button type="submit" onclick="return confirm('Cancel this offer?');">Cancel Offer</button>
+              </form>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="empty-message">You haven't sent any offers yet.</p>
+      <% } %>
+    </div>
+
+        <div class = "offers-container">
+      <h2>Offers Received</h2>
+      <% if (offerReceived && offerReceived.length) { %>
+        <div class="card-grid">
+          <% offerReceived.forEach(function(offer) { %>
+            <div class="card-item" style="display:flex;flex-direction:column;align-items:center;">
+              <div style="display:flex;gap:1rem;align-items:center;">
+                <div style="text-align:center;">
+                  <p class="card-thumb-name" style="margin-bottom:6px;">They want</p>
+                  <a href="/trades/<%= offer.tradeId %>" class="card-thumb">
+                    <img src="/Images/<%= offer.image %>" alt="<%= offer.cardName %>" width="110" height="150">
+                  </a>
+                  <p class="card-thumb-name"><%= offer.cardName %></p>
+                </div>
+                <div style="font-size:1.5rem;">⇄</div>
+                <div style="text-align:center;">
+                  <p class="card-thumb-name" style="margin-bottom:6px;">They offered</p>
+                  <div class="card-thumb">
+                    <img src="/Images/<%= offer.offeredCardImage %>" alt="<%= offer.offeredCardName %>" width="110" height="150">
+                  </div>
+                  <p class="card-thumb-name"><%= offer.offeredCardName %></p>
+                </div>
+              </div>
+              <form action="/trades/<%= offer.tradeId %>/offers/accept" method="POST">
+                <input type="hidden" name="offerId" value="<%= offer.id %>">
+                <button type="submit" onclick="return confirm('Accept this offer?');">Accept Offer</button>
+              </form>
+              <form action="/trades/<%= offer.tradeId %>/offers/reject" method="POST">
+                <input type="hidden" name="offerId" value="<%= offer.id %>">
+                <button type="submit" onclick="return confirm('Reject this offer?');">Reject Offer</button>
+              </form>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="empty-message">You haven't received any offers yet.</p>
+      <% } %>
+    </div>
+
     <div class="mycards-container">
       <h2>My Cards</h2>
       <% if (myCards && myCards.length) { %>

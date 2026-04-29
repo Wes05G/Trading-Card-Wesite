@@ -19,6 +19,7 @@ router.get('/blackBolt', controller.BBcards);
 router.get('/whiteFlare', controller.WFcards);
 
 router.get('/:id/offers', isLoggedIn, controller.offers);
+router.post('/:id/offers', isLoggedIn, controller.submitOffer);
 router.get('/:id/edit', isLoggedIn, isAuthor, controller.edit);
 router.get('/:id', controller.details);
 router.post('/edit/:id', isLoggedIn, isAuthor, controller.update);
@@ -26,5 +27,9 @@ router.post('/delete/:id', isLoggedIn, isAuthor, controller.delete);
 
 router.post('/wishlist/add/:id', isLoggedIn, controller.addToWishlist);
 router.post('/wishlist/remove/:id', isLoggedIn, controller.removeFromWishlist);
+
+router.post('/:id/offers/accept', isLoggedIn, isAuthor, controller.acceptOffer);
+router.post('/:id/offers/reject', isLoggedIn, isAuthor, controller.rejectOffer);
+router.post('/:id/offers/cancel', isLoggedIn, controller.cancelOffer);
 
 module.exports = router;
