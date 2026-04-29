@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const fs = require('fs');
-
-//the details of the cards
 
 const tradeSchema = new Schema({
     id: { type: String, required: true, unique: true },
@@ -61,7 +58,7 @@ const save = (newtrade) => {
   // Save to JSON file
   fs.writeFileSync('./trades.json', JSON.stringify(trades, null, 2));
 
-  // return the saved trade 
+  // return the saved trade
   return newtrade;
 };
 //update a card

@@ -5,6 +5,6 @@ const fs = require('fs');
 const wishlistSchema = new Schema({
     userId: { type: String, required: true, unique: true },
     cards: { type: [String], default: [] },
-}, { id: false });  
+}, { id: false });
 
 module.exports = mongoose.model('Wishlist', wishlistSchema, 'Wishlist');

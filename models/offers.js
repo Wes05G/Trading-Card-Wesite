@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const fs = require('fs');
 
 const offersSchema = new Schema({
-    id: { type: String, required: true, unique: true },
     tradeId: { type: String, required: true },
     offeredCardId: { type: String, required: true },
     userId: { type: String, required: true },
@@ -13,6 +11,6 @@ const offersSchema = new Schema({
     offeredCardName: { type: String },
     image: { type: String },
     offeredCardImage: { type: String },
-}, { id: false });
+});
 
 module.exports = mongoose.model('Offers', offersSchema, 'Offers');
