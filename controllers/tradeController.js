@@ -35,14 +35,18 @@ exports.details = async (req, res) => {
   }
 };
 
-exports.new = (req, res) => {
+exports.new = async (req, res) => {
   res.render('trades/newTrade');
 };
 
 exports.add = async (req, res) => {
   try {
-    const lastTrade = await model.findOne({}).sort({ id: -1 });
-    const nextId = lastTrade ? String(Number(lastTrade.id) + 1) : '1';
+    const result = await model.aggregate([
+      { $addFields: { numericId: { $toInt: '$id' } } },
+      { $sort: { numericId: -1 } },
+      { $limit: 1 },
+    ]);
+    const nextId = result.length > 0 ? String(result[0].numericId + 1) : '1';
     await model.create({
       ...req.body,
       id: nextId,
