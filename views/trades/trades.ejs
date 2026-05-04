@@ -17,6 +17,9 @@
                         <a href="/trades/<%= t.id %>" class="card-thumb">
                             <img src="/Images/<%= t.image %>" alt="<%= t.cardName %>" width="110" height="150">
                             <p class="card-thumb-name"><%= t.cardName %></p>
+                            <% if (t.status === 'pending') { %>
+                                <span class="status-badge pending">Pending</span>
+                            <% } %>
                         </a>
                     <% }) %>
                 </div>

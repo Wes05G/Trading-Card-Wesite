@@ -27,7 +27,7 @@
 
       <div class="form-actions">
         <button class="button" onclick="window.history.back();">← Back</button>
-        <% if (locals.currentUser && currentUser.id !== trade.userId) { %>
+        <% if (locals.currentUser && currentUser.id !== trade.userId && trade.status === 'open') { %>
           <a class="button" href="/trades/<%= trade.id %>/offers">Trade</a>
         <% } %>
         
